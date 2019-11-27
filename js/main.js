@@ -30,7 +30,7 @@ const app = {
 
 
         //how to get a /search/person
-        url = `https://api.themoviedb.org/3/search/person?api_key=${app.apiKey}&query=${app.searchQuery}`;
+        let url = `https://api.themoviedb.org/3/search/person?api_key=${app.apiKey}&query=${app.searchQuery}`;
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -51,12 +51,34 @@ const app = {
                         testMovies.textContent = movie.id + " " + movie.original_title;
                         document.querySelector('main').appendChild(testMovies);
                     })
+                    app.movieID = data.results[0].known_for[0].id;
                 }
-                
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
+
+                //now to see if i can handle the next fetch call
+                let movieUrl = `https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`
+                let castURL = `https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`
+
+                let requests = [fetch(movieUrl), fetch(castURL)];
+
+                //now to do the promise for both urls:
+
+                Promise.all(requests)
+                    .then(responses => {
+                        return [responses[0].json(), responses[1].json()];
+                    })
+                    .then(details => {
+                        console.log(details[0]);
+                    })
+                    .catch(err => {
+                        console.log(err.message);
+                    })
+
+                        
+                        
+                    })
+                    .catch(err => {
+                        console.log(err.message);
+                    })
     }
 }
 document.addEventListener('DOMContentLoaded', app.init);
