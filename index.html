@@ -1,39 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
     <title>Movie App</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/main.js" defer></script>
-  </head>
-  <body>
+</head>
+<body>
     <main>
-      <div id="green" class="page active">
-        <a href="#green" data-href="green">Green</a>
-        <a href="#gold" data-href="gold">Gold</a>
-        <a href="#blue" data-href="blue">Blue</a>
-        <a href="#red" data-href="red">Red</a>
-      </div>
-      <div id="gold" class="page">
-        <a href="#green" data-href="green">Green</a>
-        <a href="#gold" data-href="gold">Gold</a>
-        <a href="#blue" data-href="blue">Blue</a>
-        <a href="#red" data-href="red">Red</a>
-      </div>
-      <div id="blue" class="page">
-        <a href="#green" data-href="green">Green</a>
-        <a href="#gold" data-href="gold">Gold</a>
-        <a href="#blue" data-href="blue">Blue</a>
-        <a href="#red" data-href="red">Red</a>
-      </div>
-      <div id="red" class="page">
-        <a href="#green" data-href="green">Green</a>
-        <a href="#gold" data-href="gold">Gold</a>
-        <a href="#blue" data-href="blue">Blue</a>
-        <a href="#red" data-href="red">Red</a>
-      </div>
+        <form action="">
+                <div class="formBox">
+                <label for="actor">Actor</label>
+                <input type="text" id="actor" placeholder="John Claude Vann Damme">
+                </div>
+                <div class="formBox">
+                    <button id="btn">Search Actor</button>
+                </div>
+        </form>
     </main>
-  </body>
+    <script src="js/main.js"></script>
+</body>
 </html>
