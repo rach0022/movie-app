@@ -5,6 +5,10 @@ const app = {
     baseURL: null,
     pages: [],
     active: null,
+
+    //the api key for my account on TMDB
+    apiKey: '89c8c4c56a53dd80baf99fc3b4c4a86c',
+
     init: () => {
         console.log("the script is loaded");
         document.getElementById('btn').addEventListener('click',app.search);
@@ -15,13 +19,30 @@ const app = {
 
         app.searchQuery = document.getElementById('actor').value;
         console.log(app.searchQuery);
+
         let p = document.createElement('p');
-        p.textContent = app.searchQuery;
+        p.textContent = "You Searched: " + app.searchQuery;
         document.querySelector('main').appendChild(p);
 
         //old way to reset form
         // document.forms[0].reset();
         document.querySelector('form').reset();
+
+
+        //how to get a 
+        url = `https://api.themoviedb.org/3/search/person?api_key=${app.apiKey}&query=${app.searchQuery}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                data.results.forEach(actor => {
+                    let d = document.createElement('p');
+                    d.textContent = actor.name;
+                    document.querySelector('main').appendChild(d);
+                })
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
     }
 }
 document.addEventListener('DOMContentLoaded', app.init);
