@@ -10,15 +10,20 @@
 <body>
     <main>
         <!-- added onsubmit property to form to make sure it will not reload the page  -->
-        <form onsubmit="return false">
-                <div class="formBox">
-                <label for="actor">Actor</label>
-                <input type="text" id="actor" placeholder="John Claude Vann Damme">
-                </div>
-                <div class="formBox">
-                    <button id="btn">Search Actor</button>
-                </div>
-        </form>
+        <div id="searchpage">
+            <form onsubmit="return false">
+                    <div class="formBox">
+                    <label for="actor">Actor</label>
+                    <input type="text" id="actor" placeholder="John Claude Vann Damme">
+                    </div>
+                    <div class="formBox">
+                        <button id="btn">Search Actor</button>
+                    </div>
+            </form>
+        </div>
+        <div id="searchresults"></div>
+        <div id="moviesbyactor"></div>
+        <div id="moviedetails"></div>
     </main>
     <script async defer src="js/main.js"></script>
 </body>
