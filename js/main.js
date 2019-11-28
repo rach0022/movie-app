@@ -18,7 +18,9 @@ const app = {
     //remove all child elements from a parent element
     //will be used to reset individual pages for app
     removeElements: parent => {
-        while(parent.hasChildNodes){
+        //while the parent nodes has a child node
+        //keep looking until there are no children
+        while(parent.firstChild){
             parent.removeChild(parent.firstChild);
         }
         console.log(`Removed all elements from ${parent}`);
@@ -137,10 +139,15 @@ const app = {
         ev.preventDefault();
         ev.stopPropagation();
 
+        //first get a reference to the proper output div
+        //and then remove all the children from the div
+        output = document.getElementById('searchresults');
+        app.removeElements(output);
+
         app.searchQuery = document.getElementById('actor').value;
         console.log(app.searchQuery);
 
-        app.buildTitle("You Searched: " + app.searchQuery, document.querySelector('main'));
+        app.buildTitle("You Searched: " + app.searchQuery, output);
 
         //old way to reset form
         // document.forms[0].reset();
@@ -166,7 +173,7 @@ const app = {
                         app.actorData.push(actor.known_for);
                         d.setAttribute("data-actornum",app.actorData.length-1 );
                         d.addEventListener('click', app.buildActorPage);
-                        document.querySelector('main').appendChild(d);
+                        output.appendChild(d);
                     })
                 })
                 .catch(err => {
