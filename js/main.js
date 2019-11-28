@@ -14,15 +14,32 @@ const app = {
         console.log("the script is loaded");
         document.getElementById('btn').addEventListener('click',app.search);
     },
+
+    //remove all child elements from a parent element
+    //will be used to reset individual pages for app
+    removeElements: parent => {
+        while(parent.hasChildNodes){
+            parent.removeChild(parent.firstChild);
+        }
+        console.log(`Removed all elements from ${parent}`);
+    },
     //build a title in html for the page, 
     //pass in title which is the text content
     //and pass in parent referecen where you want the title appeneded too
     buildTitle: (title, parent) => {
+        console.log(location.href);
         let p = document.createElement('h3');
         p.textContent = title;
         parent.appendChild(p);
     },
-
+    //build an html element based on what is specified
+    //set textcontent to the text specififed and 
+    //make the parent to apeend to the parent
+    buildElement: (text, element, parent) => {
+        let p = document.createElement(`${element}`);
+        p.textContent = text;
+        parent.appendChild(p);
+    },
     //build an img element with only a movie object from TMDB being given
     buildTMDBImage: (movie, size, parent) => {
         //set the width property of the image src query
@@ -69,10 +86,8 @@ const app = {
                 app.buildTitle("Cast Members:", document.querySelector('main'));
                 //if it is cast data loop through each cast member and build a name
                 data.cast.forEach(member => {
-                    let p = document.createElement('p');
-                    p.textContent = `Actor: ${member.name} | Character in movie: ${member.character}`;
-                    document.querySelector('main').appendChild(p);
-                })
+                    app.buildElement(`Cast #${member.cast_id} ${member.name} | Character in movie: ${member.character}`, 'p', document.querySelector('main'));
+                });
                 console.log("cast data:", data.cast);
                 
 
