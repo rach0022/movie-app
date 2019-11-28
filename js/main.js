@@ -61,8 +61,12 @@ const app = {
         ev.preventDefault();
         ev.stopPropagation();
 
+        //first get a reference to the proper output div and remove all children within it
+        let output = document.getElementById('moviesbyactor');
+        app.removeElements(output);
+
         //build the title for this page
-        app.buildTitle(ev.target.textContent, document.querySelector('main'));
+        app.buildTitle("Movies by: " + ev.target.textContent, output);
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
@@ -74,7 +78,7 @@ const app = {
 
             //add a click listener to test if movies can generate movie & cast data
             testMovies.addEventListener('click', app.buildMoviePage);
-            document.querySelector('main').appendChild(testMovies);
+            output.appendChild(testMovies);
         })
     },
     //build a function to process the movie data from the double fetch promise all call
@@ -141,7 +145,7 @@ const app = {
 
         //first get a reference to the proper output div
         //and then remove all the children from the div
-        output = document.getElementById('searchresults');
+        let output = document.getElementById('searchresults');
         app.removeElements(output);
 
         app.searchQuery = document.getElementById('actor').value;
