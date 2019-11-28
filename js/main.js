@@ -47,14 +47,17 @@ const app = {
                 
                 if(data.results[0]){
                     data.results[0].known_for.forEach(movie => {
+                        //create the element holding the movie results
                         let testMovies = document.createElement('p');
                         testMovies.textContent = movie.id + " " + movie.original_title;
+                        testMovies.setAttribute("data-movieid", movie.id);
                         document.querySelector('main').appendChild(testMovies);
                     })
                     app.movieID = data.results[0].known_for[0].id;
                 }
 
                 //now to see if i can handle the next fetch call
+                //movie url is the 
                 let movieUrl = `https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`
                 let castURL = `https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`
 
