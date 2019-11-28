@@ -3,6 +3,7 @@ const app = {
     actorData: [],
     movieID: null,
     baseURL: null,
+    imageBaseURL: "https://image.tmdb.org/t/p/",
     pages: [],
     active: null,
 
@@ -13,9 +14,36 @@ const app = {
         console.log("the script is loaded");
         document.getElementById('btn').addEventListener('click',app.search);
     },
+    //build a title in html for the page, 
+    //pass in title which is the text content
+    //and pass in parent referecen where you want the title appeneded too
+    buildTitle: (title, parent) => {
+        let p = document.createElement('h3');
+        p.textContent = title;
+        parent.appendChild(p);
+    },
+
+    //build an img element with only a movie object from TMDB being given
+    buildTMDBImage: (movie, size, parent) => {
+        //set the width property of the image src query
+        let width = `w${size}/`;
+        
+        let poster = document.createElement('img');
+        poster.title = movie.tagline;
+        poster.alt = movie.tagline;
+        poster.src = app.imageBaseURL + width + movie.poster_path;
+        parent.appendChild(poster);
+    },
     buildActorPage: ev => {
+        //this is where we build the actor data for page 3
+        //this will show the actors name plus a list of movies they are known for
+
+        //first stop the form from submitting accidentally
         ev.preventDefault();
         ev.stopPropagation();
+
+        //build the title for this page
+        app.buildTitle(ev.target.textContent, document.querySelector('main'));
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
@@ -29,7 +57,6 @@ const app = {
             testMovies.addEventListener('click', app.buildMoviePage);
             document.querySelector('main').appendChild(testMovies);
         })
-        // app.movieID = data.results[0].known_for[0].id;
     },
     //build a function to process the movie data from the double fetch promise all call
     processMovies: moviePromise => {
@@ -37,7 +64,9 @@ const app = {
 
             //cehck if it is cast data or movie data
             if(data.cast){
-
+                //this is where we build the cast data for page 4
+                //set a title to show the cast
+                app.buildTitle("Cast Members:", document.querySelector('main'));
                 //if it is cast data loop through each cast member and build a name
                 data.cast.forEach(member => {
                     let p = document.createElement('p');
@@ -49,10 +78,14 @@ const app = {
 
                 // data.cast.forea 
             } else {
+                //this is where we build the movie data for the page 4
                 console.log("movie data", data);
-                let p = document.createElement("p");
-                p.textContent = data.tagline + data.release_date;
-                document.querySelector('main').appendChild(p);
+
+                //create the title for the page
+                app.buildTitle(`Released: ${data.release_date} Title: ${data.title}`, document.querySelector('main'));
+                app.buildTMDBImage(data, 200, document.querySelector('main'));
+                
+
             }
             
         })
@@ -71,7 +104,7 @@ const app = {
         let requests = [movieUrl, castURL];
 
         //now to do the promise for both urls:
-
+        //reroute to processMovies call back to make sure promises are done pending
         Promise.all(requests)
             .then(movies => {
                 
@@ -92,9 +125,7 @@ const app = {
         app.searchQuery = document.getElementById('actor').value;
         console.log(app.searchQuery);
 
-        let p = document.createElement('p');
-        p.textContent = "You Searched: " + app.searchQuery;
-        document.querySelector('main').appendChild(p);
+        app.buildTitle("You Searched: " + app.searchQuery, document.querySelector('main'));
 
         //old way to reset form
         // document.forms[0].reset();
