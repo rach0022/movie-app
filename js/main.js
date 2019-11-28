@@ -20,10 +20,12 @@ const app = {
     removeElements: parent => {
         //while the parent nodes has a child node
         //keep looking until there are no children
-        while(parent.firstChild){
-            parent.removeChild(parent.firstChild);
+        if(parent.firstChild){
+            while(parent.firstChild){
+                parent.removeChild(parent.firstChild);
+            }
+            console.log(`Removed all elements from ${parent}`);
         }
-        console.log(`Removed all elements from ${parent}`);
     },
     //build a title in html for the page, 
     //pass in title which is the text content
@@ -86,13 +88,15 @@ const app = {
 
         //first set the output to the proper div
         //and remove any elemnts from this div
-        let output = document.getElementById('moviedetails');
-        app.removeElements(output);
+        let output = document.getElementById('movieresults');
 
         moviePromise.then(data => {
 
             //cehck if it is cast data or movie data
             if(data.cast){
+                //first set the proper output and clear whatever is there
+                output = document.getElementById('cast');
+                app.removeElements(output);
                 //this is where we build the cast data for page 4
                 //set a title to show the cast
                 app.buildTitle("Cast Members:", output);
@@ -105,6 +109,10 @@ const app = {
 
                 // data.cast.forea 
             } else {
+                //first set the proper output  of movie details and clear whatever is there
+                output = document.getElementById('moviedetails');
+                app.removeElements(output);
+
                 //this is where we build the movie data for the page 4
                 console.log("movie data", data);
 
