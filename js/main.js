@@ -83,16 +83,22 @@ const app = {
     },
     //build a function to process the movie data from the double fetch promise all call
     processMovies: moviePromise => {
+
+        //first set the output to the proper div
+        //and remove any elemnts from this div
+        let output = document.getElementById('moviedetails');
+        app.removeElements(output);
+
         moviePromise.then(data => {
 
             //cehck if it is cast data or movie data
             if(data.cast){
                 //this is where we build the cast data for page 4
                 //set a title to show the cast
-                app.buildTitle("Cast Members:", document.querySelector('main'));
+                app.buildTitle("Cast Members:", output);
                 //if it is cast data loop through each cast member and build a name
                 data.cast.forEach(member => {
-                    app.buildElement(`Cast #${member.cast_id} ${member.name} | Character in movie: ${member.character}`, 'p', document.querySelector('main'));
+                    app.buildElement(`Cast #${member.cast_id} ${member.name} | Character in movie: ${member.character}`, 'p', output);
                 });
                 console.log("cast data:", data.cast);
                 
@@ -103,8 +109,8 @@ const app = {
                 console.log("movie data", data);
 
                 //create the title for the page
-                app.buildTitle(`Released: ${data.release_date} Title: ${data.title}`, document.querySelector('main'));
-                app.buildTMDBImage(data, 200, document.querySelector('main'));
+                app.buildTitle(`Released: ${data.release_date} Title: ${data.title}`, output);
+                app.buildTMDBImage(data, 200, output);
                 
 
             }
@@ -114,8 +120,10 @@ const app = {
 
     //call this function when you need to build teh movie page and also cast details for that movie
     buildMoviePage: ev => {
+        //first make sure the default events dont happen
         ev.preventDefault();
         ev.stopPropagation();
+
         //now to see if i can handle the next fetch call
         //movie url is the
         app.movieID = ev.target.getAttribute("data-movieid");
