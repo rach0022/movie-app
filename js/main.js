@@ -145,6 +145,17 @@ const app = {
 
                 //create the title for the page
                 app.buildTitle(`Released: ${data.release_date} Title: ${data.title}`, output);
+
+                //get all the genres and display them under the movie
+                let genreText = document.createElement('p');
+                genreText.textContent = "Genres: ";
+                data.genres.forEach(genre =>{
+                    genreText.textContent += genre.name + " ";
+                });
+                console.log(genreText);
+                console.log(output);
+                output.appendChild(genreText);
+
                 app.buildTMDBImage(data, 200, output);
                 
 
