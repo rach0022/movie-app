@@ -55,6 +55,10 @@ const app = {
         poster.src = app.imageBaseURL + width + movie.poster_path;
         parent.appendChild(poster);
     },
+    changePage: (currentPage, newPage)=>{
+        currentPage.classList.toggle('active');
+        newPage.classList.toggle('active');
+    },
     buildActorPage: ev => {
         //this is where we build the actor data for page 3
         //this will show the actors name plus a list of movies they are known for
