@@ -9,13 +9,16 @@
     <title>Movie App</title>
 </head>
 <body>
+    <header>
+        <button id="backbutton">&lt;</button>
+    </header>
     <main>
         <!-- added onsubmit property to form to make sure it will not reload the page  -->
         <div id="searchpage" class="page active">
             <form onsubmit="return false">
                     <div class="formBox">
                     <label for="actor">Actor</label>
-                    <input type="text" id="actor" placeholder="John Claude Vann Damme">
+                    <input type="text" id="actor" placeholder="Jean-Claude Van Damme">
                     </div>
                     <div class="formBox">
                         <button id="search">Search Actor</button>
@@ -28,7 +31,6 @@
             <div id="moviedetails"></div>
             <div id="cast"></div>
         </div>
-        <button id="backbutton">Go Back</button>
     </main>
     <!-- took out async and defer attributes to allow the script on github pages version to load  -->
     <script src="js/main.js"></script>

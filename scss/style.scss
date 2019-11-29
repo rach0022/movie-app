@@ -1,5 +1,5 @@
 main {
-    background-color: pink;
+    // background-color: lightblue;
 }
 
 // taken from simple spa demo, page and active class idea 
@@ -20,4 +20,27 @@ main {
         opacity: 1;
         z-index: 100;
     }
+}
+
+#backbutton{
+    z-index: 200;
+
+    //creating the floating action button:
+    //set with and height
+    width: 70px;
+    height: 70px;
+
+    //make the font size bigger:
+    font-size: 25px;
+
+    //make button bright red for now
+    background-color: #278231;
+
+    //make button a circle and give it a box shadow to look like its floating
+    border-radius: 50%;
+    box-shadow: 0 6px 10px 0 #333;
+
+    position: fixed;
+    top: 85vh;
+
 }

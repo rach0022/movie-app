@@ -17,40 +17,13 @@ const app = {
         app.active = document.getElementById('searchpage');
 
         //set up the app.pages with each "page" (corresponding div element)
-        app.pages.push(document.getElementById('searchpage')); //element 0
-        app.pages.push(document.getElementById('searchresults')); //element 1
-        app.pages.push(document.getElementById('actordetails')); //element 2
-        app.pages.push(document.getElementById('movieresults')); //element 3
+        app.updatePages();
 
         //add the event listener to the back button
-        document.getElementById('backbutton').addEventListener('click', app.backbutton);
+        document.getElementById('backbutton').addEventListener('click', app.backButton);
 
         //add the event listener to the search button
-        document.getElementById('search').addEventListener('click',app.search);
-    },
-    backButton: ev => {
-
-        //stop any default acations from the button occuring:
-        ev.preventDefault();
-        ev.stopPropagation();
-
-        switch(app.active){
-            case app.pages[0]:
-                // the do nothing statement for the back button 
-                break;
-            case app.pages[1]:
-                app.active = pages[0];
-                app.changePage(pages[0]);
-                break;
-            case app.pages[2]:
-                    app.active = pages[1];
-                    app.changePage(pages[1]);
-                break;
-            case app.pages[3]:
-                app.active = pages[2];
-                app.changePage(pages[2]);
-                break;
-        }
+        document.getElementById('search').addEventListener('click', app.search);
     },
 
     //remove all child elements from a parent element
@@ -62,14 +35,12 @@ const app = {
             while(parent.firstChild){
                 parent.removeChild(parent.firstChild);
             }
-            console.log(`Removed all elements from ${parent}`);
         }
     },
     //build a title in html for the page, 
     //pass in title which is the text content
     //and pass in parent referecen where you want the title appeneded too
     buildTitle: (title, parent) => {
-        console.log(location.href);
         let p = document.createElement('h3');
         p.textContent = title;
         parent.appendChild(p);
@@ -97,15 +68,13 @@ const app = {
     //added method to change page
     //the current page will be flipped from active
     //the new page will be flipped into active
-    changePage: (newPage)=>{
+    changePage: newPage=>{
         //swtich the active class onthe active page 
         app.active.classList.toggle('active');
 
         //change the app.active into the new page and toggle the active class on said page
         app.active = newPage;
         newPage.classList.toggle('active');
-
-        console.log("the new page is: " + newPage);
     },
     buildActorPage: ev => {
         //this is where we build the actor data for page 3
@@ -263,6 +232,36 @@ const app = {
                     console.log(err.message);
                 });
         }
+    },
+    backButton: ev => {
+        //stop any default acations from the button occuring:
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        //update the pages for app.pages:
+        app.updatePages();
+
+        switch(app.active){
+            case app.pages[0]:
+                // the do nothing statement for the back button 
+                break;
+            case app.pages[1]:
+                app.changePage(document.getElementById('searchpage'));
+                break;
+            case app.pages[2]:
+                    app.changePage(document.getElementById('searchresults'));
+                break;
+            case app.pages[3]:
+                app.changePage(document.getElementById('actordetails'));
+                break;
+        }
+    },
+    updatePages: () => {
+        //set up the app.pages with each "page" (corresponding div element)
+        app.pages.push(document.getElementById('searchpage')); //element 0
+        app.pages.push(document.getElementById('searchresults')); //element 1
+        app.pages.push(document.getElementById('actordetails')); //element 2
+        app.pages.push(document.getElementById('movieresults')); //element 3
     }
 }
 document.addEventListener('DOMContentLoaded', app.init);
