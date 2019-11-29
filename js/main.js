@@ -146,6 +146,7 @@ const app = {
             switch(movie.media_type){
                 case "tv":
                     testMovies.textContent = movie.id + " " + movie.name;
+                    movieDiv.classList.add("tv");
                     break;
                 case "movie":
                     testMovies.textContent = movie.id + " " + movie.title;
