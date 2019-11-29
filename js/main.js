@@ -126,16 +126,16 @@ const app = {
         app.changePage(output);
 
         //build the title for this page
-        app.buildTitle("Movies by: " + ev.target.parentNode.getAttribute("data-actorname"), output);
+        app.buildTitle("Movies by: " + ev.currentTarget.getAttribute("data-actorname"), output);
 
         //build the poster image for the actor:
-        console.log(ev.target.parentNode.getAttribute("data-actornum"));
-        app.buildActorImage(app.actorData[ev.target.parentNode.getAttribute("data-actornum")], 300, output);
+        console.log(ev.currentTarget.getAttribute("data-actornum"));
+        app.buildActorImage(app.actorData[ev.currentTarget.getAttribute("data-actornum")], 300, output);
 
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
-        app.actorData[ev.target.parentNode.getAttribute("data-actornum")].known_for.forEach(movie => {
+        app.actorData[ev.currentTarget.getAttribute("data-actornum")].known_for.forEach(movie => {
             //now create a movie div to add the movies too
             let movieDiv = document.createElement('div');
             movieDiv.classList.add('movie');
@@ -166,11 +166,10 @@ const app = {
         //first set the output to the proper div
         //and remove any elemnts from this div
         let output = document.getElementById('movieresults');
-        
-        
-
         moviePromise.then(data => {
 
+            //first check if it is movie data or cast data:
+            console.log(data);
             //cehck if it is cast data or movie data
             //also check if the data.cast is null and remove all elements
             //incase the cast data is remaining for another movie
@@ -215,16 +214,14 @@ const app = {
                 } else {
                     genreText += "Not Found";
                     //since genre is underfined, remove the cast from the page
+                    //because without genre it is usually a tv show and has no cast property
                     //i dont use output method because i want to keep the reference
                     //that already exist for output
                     app.removeElements(document.getElementById('cast'));
                     app.buildTitle("Cast Members:\nUndefined", document.getElementById('cast'));
                 }
                 app.buildMovieImage(data, 200, output);
-            }
-
-            
-        })
+        }})
         .catch(err =>{
             console.log("error occured:",err.message);
 
@@ -242,9 +239,11 @@ const app = {
 
         //now to see if i can handle the next fetch call
         //movie url is the
-        app.movieID = ev.target.parentNode.getAttribute("data-movieid");
+        app.movieID = ev.currentTarget.getAttribute("data-movieid");
         let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
         let castURL = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`);
+
+        console.log(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`, ev.currentTarget.getAttribute("data-movieid"));
 
         let requests = [movieUrl, castURL];
 
