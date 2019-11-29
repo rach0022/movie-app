@@ -165,6 +165,7 @@ const app = {
                 //cast data is loaded
                 output = document.getElementById('cast');
                 app.removeElements(output);
+                app.buildTitle("Cast Members:\nUndefined", output);
             }
             if(data.cast){
                 //first set the proper output and clear whatever is there
