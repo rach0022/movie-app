@@ -12,6 +12,7 @@ const app = {
 
     init: () => {
         console.log("the script is loaded");
+        app.active = document.getElementById('searchpage');
         document.getElementById('btn').addEventListener('click',app.search);
     },
 
@@ -55,9 +56,19 @@ const app = {
         poster.src = app.imageBaseURL + width + movie.poster_path;
         parent.appendChild(poster);
     },
-    changePage: (currentPage, newPage)=>{
-        currentPage.classList.toggle('active');
+
+    //added method to change page
+    //the current page will be flipped from active
+    //the new page will be flipped into active
+    changePage: (newPage)=>{
+        //swtich the active class onthe active page 
+        app.active.classList.toggle('active');
+
+        //change the app.active into the new page and toggle the active class on said page
+        app.active = newPage;
         newPage.classList.toggle('active');
+
+        console.log("the new page is: " + newPage);
     },
     buildActorPage: ev => {
         //this is where we build the actor data for page 3
@@ -70,6 +81,9 @@ const app = {
         //first get a reference to the proper output div and remove all children within it
         let output = document.getElementById('moviesbyactor');
         app.removeElements(output);
+
+        //change the current page and the properties in the app
+        app.changePage(output);
 
         //build the title for this page
         app.buildTitle("Movies by: " + ev.target.textContent, output);
@@ -93,6 +107,9 @@ const app = {
         //first set the output to the proper div
         //and remove any elemnts from this div
         let output = document.getElementById('movieresults');
+
+        //change the active page style and set the active page in the app
+        app.changePage(output);
 
         moviePromise.then(data => {
 
@@ -159,15 +176,19 @@ const app = {
             })
     },
     search: ev => {
-        console.log("this happens" + this);
         //stop the form being submitted
         ev.preventDefault();
         ev.stopPropagation();
 
         //first get a reference to the proper output div
         //and then remove all the children from the div
+        //and then switch the reference of the current page
         let output = document.getElementById('searchresults');
+        app.changePage(output);
         app.removeElements(output);
+
+        //switch the active page to the output div
+        app.active = output;
 
         app.searchQuery = document.getElementById('actor').value;
         console.log(app.searchQuery);
