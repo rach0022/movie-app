@@ -127,15 +127,19 @@ const app = {
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
         app.actorData[ev.target.parentNode.getAttribute("data-actornum")].known_for.forEach(movie => {
+            //now create a movie div to add the movies too
+            let movieDiv = document.createElement('div');
+            
             //create the element holding the movie results
             let testMovies = document.createElement('p');
             testMovies.textContent = movie.id + " " + movie.original_title;
-            testMovies.setAttribute("data-movieid", movie.id);
+            movieDiv.setAttribute("data-movieid", movie.id);
 
             //add a click listener to test if movies can generate movie & cast data
-            testMovies.addEventListener('click', app.buildMoviePage);
-            output.appendChild(testMovies);
-            app.buildMovieImage(movie, 200, output);
+            movieDiv.addEventListener('click', app.buildMoviePage);
+            movieDiv.appendChild(testMovies);
+            app.buildMovieImage(movie, 200, movieDiv);
+            output.appendChild(movieDiv);
         })
     },
     //build a function to process the movie data from the double fetch promise all call
@@ -183,9 +187,14 @@ const app = {
                 //get all the genres and display them under the movie
                 let genreText = document.createElement('p');
                 genreText.textContent = "Genres: ";
-                data.genres.forEach(genre =>{
-                    genreText.textContent += genre.name + " ";
-                });
+                if(data.genres){
+                    data.genres.forEach(genre =>{
+                        genreText.textContent += genre.name + " ";
+                    });
+                } else {
+                    genreText += "Not Found";
+                }
+                
                 console.log(genreText);
                 console.log(output);
                 output.appendChild(genreText);
@@ -206,7 +215,7 @@ const app = {
 
         //now to see if i can handle the next fetch call
         //movie url is the
-        app.movieID = ev.target.getAttribute("data-movieid");
+        app.movieID = ev.target.parentNode.getAttribute("data-movieid");
         let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
         let castURL = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`);
 
