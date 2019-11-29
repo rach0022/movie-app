@@ -15,6 +15,18 @@ const app = {
         app.active = document.getElementById('searchpage');
         document.getElementById('search').addEventListener('click',app.search);
     },
+    backButton: ev => {
+        switch(app.active){
+            case document.getElementById('searchpage'):
+                break;
+            case document.getElementById('searchresults'):
+                break;
+            case document.getElementById('actordetails'):
+                break;
+            case document.getElementById('movieresults'):
+                break;
+        }
+    },
 
     //remove all child elements from a parent element
     //will be used to reset individual pages for app
@@ -79,7 +91,7 @@ const app = {
         ev.stopPropagation();
 
         //first get a reference to the proper output div and remove all children within it
-        let output = document.getElementById('moviesbyactor');
+        let output = document.getElementById('actordetails');
         app.removeElements(output);
 
         //change the current page and the properties in the app
@@ -224,8 +236,8 @@ const app = {
                 })
                 .catch(err => {
                     console.log(err.message);
-                })
-            }
+                });
         }
     }
+}
 document.addEventListener('DOMContentLoaded', app.init);
