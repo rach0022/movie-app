@@ -45,3 +45,26 @@ main {
     left: 85vw;
 
 }
+
+.movie{
+    margin-top: 10px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    text-align: center;
+    border: 2px solid #333;
+}
+
+#cast{
+    text-align: center;
+    img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+#moviedetails{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}

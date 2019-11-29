@@ -117,7 +117,7 @@ const app = {
         app.changePage(output);
 
         //build the title for this page
-        app.buildTitle("Movies by: " + ev.target.textContent, output);
+        app.buildTitle("Movies by: " + ev.target.parentNode.getAttribute("data-actorname"), output);
 
         //build the poster image for the actor:
         console.log(ev.target.parentNode.getAttribute("data-actornum"));
@@ -129,6 +129,7 @@ const app = {
         app.actorData[ev.target.parentNode.getAttribute("data-actornum")].known_for.forEach(movie => {
             //now create a movie div to add the movies too
             let movieDiv = document.createElement('div');
+            movieDiv.classList.add('movie');
             
             //create the element holding the movie results
             let testMovies = document.createElement('p');
@@ -282,6 +283,7 @@ const app = {
                         //data in the app.actorData array to call it later in build movies.
                         app.actorData.push(actor);
                         actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
+                        actorDiv.setAttribute("data-actorname", actor.name);
                         actorDiv.addEventListener('click', app.buildActorPage);
                         actorDiv.appendChild(d);
                         output.appendChild(actorDiv);
