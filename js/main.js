@@ -64,7 +64,7 @@ const app = {
         if(movie.poster_path){
             poster.src = app.imageBaseURL + width + movie.poster_path;
         } else {
-            poster.src = "/images/noMoviePoster.png";
+            poster.src = "images/noMoviePoster.png";
         }
         parent.appendChild(poster);
     },
@@ -82,7 +82,7 @@ const app = {
         if(actor.profile_path){
             poster.src = app.imageBaseURL + width + actor.profile_path;
         } else {
-            poster.src = "/images/noProfile.jpg";
+            poster.src = "images/noProfile.jpg";
         }
         
 
