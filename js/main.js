@@ -159,23 +159,13 @@ const app = {
         //and remove any elemnts from this div
         let output = document.getElementById('movieresults');
 
-        //change the active page style and set the active page in the app
-        app.changePage(output);
+        
 
         moviePromise.then(data => {
 
             //cehck if it is cast data or movie data
             //also check if the data.cast is null and remove all elements
             //incase the cast data is remaining for another movie
-
-            if(!data.cast){
-                //get a reference to the output div for cast
-                //and remove all the elements if no
-                //cast data is loaded
-                output = document.getElementById('cast');
-                app.removeElements(output);
-                app.buildTitle("Cast Members:\nUndefined", output);
-            }
             if(data.cast){
                 //first set the proper output and clear whatever is there
                 output = document.getElementById('cast');
@@ -216,11 +206,22 @@ const app = {
                     output.appendChild(genreText);
                 } else {
                     genreText += "Not Found";
+                    //since genre is underfined, remove the cast from the page
+                    output = document.getElementById('cast');
+                    app.removeElements(output);
+                    app.buildTitle("Cast Members:\nUndefined", output);
                 }
                 app.buildMovieImage(data, 200, output);
             }
+
             
         })
+        .catch(err =>{
+            console.log("error occured:",err.message);
+
+        })
+        //change the active page style and set the active page in the app
+        app.changePage(output);
     },
 
     //call this function when you need to build teh movie page and also cast details for that movie
