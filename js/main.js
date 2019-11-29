@@ -120,12 +120,13 @@ const app = {
         app.buildTitle("Movies by: " + ev.target.textContent, output);
 
         //build the poster image for the actor:
-        app.buildActorImage(app.actorData[ev.target.getAttribute("data-actornum")], 300, output);
+        console.log(ev.target.parentNode.getAttribute("data-actornum"));
+        app.buildActorImage(app.actorData[ev.target.parentNode.getAttribute("data-actornum")], 300, output);
 
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
-        app.actorData[ev.target.getAttribute("data-actornum")].known_for.forEach(movie => {
+        app.actorData[ev.target.parentNode.getAttribute("data-actornum")].known_for.forEach(movie => {
             //create the element holding the movie results
             let testMovies = document.createElement('p');
             testMovies.textContent = movie.id + " " + movie.original_title;
@@ -260,7 +261,10 @@ const app = {
 
                     //how to display all the actors with a name match
                     data.results.forEach(actor => {
-                        app.buildActorImage(actor, 200, output);
+                        let actorDiv = document.createElement('div');
+                        actorDiv.classList.add('actor');
+
+                        app.buildActorImage(actor, 200, actorDiv);
                         let d = document.createElement('p');
                         d.textContent = actor.name;
 
@@ -268,9 +272,10 @@ const app = {
                         //and then set a data-actor to the index location of the corresponding known for
                         //data in the app.actorData array to call it later in build movies.
                         app.actorData.push(actor);
-                        d.setAttribute("data-actornum",app.actorData.length-1 );
-                        d.addEventListener('click', app.buildActorPage);
-                        output.appendChild(d);
+                        actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
+                        actorDiv.addEventListener('click', app.buildActorPage);
+                        actorDiv.appendChild(d);
+                        output.appendChild(actorDiv);
                     })
                 })
                 .catch(err => {
