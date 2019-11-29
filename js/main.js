@@ -142,7 +142,15 @@ const app = {
             
             //create the element holding the movie results
             let testMovies = document.createElement('p');
-            testMovies.textContent = movie.id + " " + movie.original_title;
+            console.log(movie);
+            switch(movie.media_type){
+                case "tv":
+                    testMovies.textContent = movie.id + " " + movie.name;
+                    break;
+                case "movie":
+                    testMovies.textContent = movie.id + " " + movie.title;
+                    break;
+            }
             movieDiv.setAttribute("data-movieid", movie.id);
 
             //add a click listener to test if movies can generate movie & cast data
@@ -158,7 +166,7 @@ const app = {
         //first set the output to the proper div
         //and remove any elemnts from this div
         let output = document.getElementById('movieresults');
-
+        
         
 
         moviePromise.then(data => {
@@ -223,6 +231,7 @@ const app = {
         })
         //change the active page style and set the active page in the app
         app.changePage(output);
+        console.log(moviePromise);
     },
 
     //call this function when you need to build teh movie page and also cast details for that movie
