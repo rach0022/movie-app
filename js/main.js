@@ -232,6 +232,37 @@ const app = {
         console.log(moviePromise);
     },
 
+    //function to build a tv show page
+    //because tv shows have different properties than movies
+    //need to make specific page to deal with tvData
+    buildTvPage: tvData=>{
+
+        //reference to output div for this page
+        let output = document.getElementById('movieresults');
+
+        //get a reference to the proper divs in the movie details
+        let movieDiv = document.getElementById('moviedetails');
+        let castDiv = document.getElementById('cast');
+
+        //then clear the results
+        app.removeElements(movieDiv);
+        app.removeElements(castDiv);
+
+        //now build first the movie page with poster for a movie
+        app.buildTitle(tvData.name, movieDiv);
+        app.buildElement("Original Air Date: " + tvData.first_air_date,"p",movieDiv);
+        app.buildMovieImage(tvData, 200,movieDiv);
+        app.buildElement(tvData.overview, "p", movieDiv);
+
+        app.buildTitle(`Created By:\n`,castDiv);
+        //now build the "cast" section now changed to created by
+        tvData.created_by.forEach(director =>{
+            app.buildElement(director.name,'p', castDiv);
+            app.buildActorImage(director, 200, castDiv);
+        })
+        app.changePage(output);
+    },
+
     //call this function when you need to build teh movie page and also cast details for that movie
     buildMoviePage: ev => {
         //first make sure the default events dont happen
@@ -246,11 +277,19 @@ const app = {
         //check if the user is trying to load a tvshow or a movie
         if(ev.currentTarget.classList.contains("tv")){
             //currently nothing happens as the user is trying to load a tv show
+            //first set the tv url and then do the fetch call for the tv
+            let tvUrl = `https://api.themoviedb.org/3/tv/${app.movieID}?api_key=${app.apiKey}`;
+            fetch(tvUrl)
+                .then(response => response.json())
+                .then(app.buildTvPage)
+                .catch(err =>{
+                    console.log(err.message);
+                })
         } else {
             let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
             let castURL = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`);
 
-            console.log(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`, ev.currentTarget.getAttribute("data-movieid"));
+            // console.log(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`, ev.currentTarget.getAttribute("data-movieid"));
 
             let requests = [movieUrl, castURL];
 
