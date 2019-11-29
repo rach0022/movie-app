@@ -12,18 +12,43 @@ const app = {
 
     init: () => {
         console.log("the script is loaded");
+
+        //set the default active page to the searchpage
         app.active = document.getElementById('searchpage');
+
+        //set up the app.pages with each "page" (corresponding div element)
+        app.pages.push(document.getElementById('searchpage')); //element 0
+        app.pages.push(document.getElementById('searchresults')); //element 1
+        app.pages.push(document.getElementById('actordetails')); //element 2
+        app.pages.push(document.getElementById('movieresults')); //element 3
+
+        //add the event listener to the back button
+        document.getElementById('backbutton').addEventListener('click', app.backbutton);
+
+        //add the event listener to the search button
         document.getElementById('search').addEventListener('click',app.search);
     },
     backButton: ev => {
+
+        //stop any default acations from the button occuring:
+        ev.preventDefault();
+        ev.stopPropagation();
+
         switch(app.active){
-            case document.getElementById('searchpage'):
+            case app.pages[0]:
+                // the do nothing statement for the back button 
                 break;
-            case document.getElementById('searchresults'):
+            case app.pages[1]:
+                app.active = pages[0];
+                app.changePage(pages[0]);
                 break;
-            case document.getElementById('actordetails'):
+            case app.pages[2]:
+                    app.active = pages[1];
+                    app.changePage(pages[1]);
                 break;
-            case document.getElementById('movieresults'):
+            case app.pages[3]:
+                app.active = pages[2];
+                app.changePage(pages[2]);
                 break;
         }
     },
