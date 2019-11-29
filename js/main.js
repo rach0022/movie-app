@@ -100,6 +100,15 @@ const app = {
         //change the app.active into the new page and toggle the active class on said page
         app.active = newPage;
         newPage.classList.toggle('active');
+
+        //now make it so that the window view will go back 
+        //to the top of the page so the user doesnt have to scroll each time
+        //use the window.scrollTo method with options to define it as smooth
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
     },
     buildActorPage: ev => {
         //this is where we build the actor data for page 3
