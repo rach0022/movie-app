@@ -207,9 +207,10 @@ const app = {
                 } else {
                     genreText += "Not Found";
                     //since genre is underfined, remove the cast from the page
-                    output = document.getElementById('cast');
-                    app.removeElements(output);
-                    app.buildTitle("Cast Members:\nUndefined", output);
+                    //i dont use output method because i want to keep the reference
+                    //that already exist for output
+                    app.removeElements(document.getElementById('cast'));
+                    app.buildTitle("Cast Members:\nUndefined", document.getElementById('cast'));
                 }
                 app.buildMovieImage(data, 200, output);
             }
