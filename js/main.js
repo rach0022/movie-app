@@ -238,29 +238,36 @@ const app = {
         ev.preventDefault();
         ev.stopPropagation();
 
+
         //now to see if i can handle the next fetch call
         //movie url is the
         app.movieID = ev.currentTarget.getAttribute("data-movieid");
-        let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
-        let castURL = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`);
 
-        console.log(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`, ev.currentTarget.getAttribute("data-movieid"));
+        //check if the user is trying to load a tvshow or a movie
+        if(ev.currentTarget.classList.contains("tv")){
+            //currently nothing happens as the user is trying to load a tv show
+        } else {
+            let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
+            let castURL = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`);
 
-        let requests = [movieUrl, castURL];
+            console.log(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`, ev.currentTarget.getAttribute("data-movieid"));
 
-        //now to do the promise for both urls:
-        //reroute to processMovies call back to make sure promises are done pending
-        Promise.all(requests)
-            .then(movies => {
-                
-                //taken from steve promise all fetch video
-                movies.forEach(movie => {
-                    app.processMovies(movie.json());
+            let requests = [movieUrl, castURL];
+
+            //now to do the promise for both urls:
+            //reroute to processMovies call back to make sure promises are done pending
+            Promise.all(requests)
+                .then(movies => {
+                    
+                    //taken from steve promise all fetch video
+                    movies.forEach(movie => {
+                        app.processMovies(movie.json());
+                    })
                 })
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
+                .catch(err => {
+                    console.log(err.message);
+                })
+        }
     },
     search: ev => {
         //stop the form being submitted
