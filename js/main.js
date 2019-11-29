@@ -156,6 +156,16 @@ const app = {
         moviePromise.then(data => {
 
             //cehck if it is cast data or movie data
+            //also check if the data.cast is null and remove all elements
+            //incase the cast data is remaining for another movie
+
+            if(!data.cast){
+                //get a reference to the output div for cast
+                //and remove all the elements if no
+                //cast data is loaded
+                output = document.getElementById('cast');
+                app.removeElements(output);
+            }
             if(data.cast){
                 //first set the proper output and clear whatever is there
                 output = document.getElementById('cast');
@@ -179,6 +189,7 @@ const app = {
                 output = document.getElementById('moviedetails');
                 app.removeElements(output);
 
+
                 //this is where we build the movie data for the page 4
                 console.log("movie data", data);
 
@@ -192,17 +203,11 @@ const app = {
                     data.genres.forEach(genre =>{
                         genreText.textContent += genre.name + " ";
                     });
+                    output.appendChild(genreText);
                 } else {
                     genreText += "Not Found";
                 }
-                
-                console.log(genreText);
-                console.log(output);
-                output.appendChild(genreText);
-
                 app.buildMovieImage(data, 200, output);
-                
-
             }
             
         })
@@ -252,7 +257,7 @@ const app = {
         app.active = output;
 
         app.searchQuery = document.getElementById('actor').value;
-        console.log(app.searchQuery);
+        console.log("You searched:",app.searchQuery);
 
         app.buildTitle("You Searched: " + app.searchQuery, output);
 
