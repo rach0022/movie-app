@@ -134,6 +134,7 @@ const app = {
             //add a click listener to test if movies can generate movie & cast data
             testMovies.addEventListener('click', app.buildMoviePage);
             output.appendChild(testMovies);
+            app.buildMovieImage(movie, 200, output);
         })
     },
     //build a function to process the movie data from the double fetch promise all call
