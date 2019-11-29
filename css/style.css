@@ -24,6 +24,7 @@
   border-radius: 50%;
   box-shadow: 0 6px 10px 0 #333;
   position: fixed;
-  top: 85vh; }
+  top: 85vh;
+  left: 85vw; }
 
 /*# sourceMappingURL=style.css.map */

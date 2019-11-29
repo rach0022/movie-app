@@ -61,7 +61,11 @@ const app = {
         let poster = document.createElement('img');
         poster.title = movie.tagline;
         poster.alt = movie.tagline;
-        poster.src = app.imageBaseURL + width + movie.poster_path;
+        if(movie.poster_path){
+            poster.src = app.imageBaseURL + width + movie.poster_path;
+        } else {
+            poster.src = "/images/noMoviePoster.png";
+        }
         parent.appendChild(poster);
     },
 
@@ -75,7 +79,12 @@ const app = {
         let poster = document.createElement('img');
         poster.title = actor.name;
         poster.alt = actor.name;
-        poster.src = app.imageBaseURL + width + actor.profile_path;
+        if(actor.profile_path){
+            poster.src = app.imageBaseURL + width + actor.profile_path;
+        } else {
+            poster.src = "/images/noProfile.jpg";
+        }
+        
 
         //append the image to the parent specified
         parent.appendChild(poster);
@@ -149,7 +158,10 @@ const app = {
                 app.buildTitle("Cast Members:", output);
                 //if it is cast data loop through each cast member and build a name
                 data.cast.forEach(member => {
+                    //build an img for each cast member and show the actors name and character
+                    app.buildActorImage(member, 200, output);
                     app.buildElement(`Cast #${member.cast_id} ${member.name} | Character in movie: ${member.character}`, 'p', output);
+
                 });
                 console.log("cast data:", data.cast);
                 
@@ -247,6 +259,7 @@ const app = {
 
                     //how to display all the actors with a name match
                     data.results.forEach(actor => {
+                        app.buildActorImage(actor, 200, output);
                         let d = document.createElement('p');
                         d.textContent = actor.name;
 
