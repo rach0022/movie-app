@@ -27,12 +27,22 @@
   top: 85vh;
   left: 85vw; }
 
+.actor img {
+  width: 200px;
+  height: 300px; }
+
 .movie {
   margin-top: 10px;
   padding-bottom: 0;
   margin-bottom: 0;
   text-align: center;
   border: 2px solid #333; }
+  .movie img {
+    margin-bottom: 0;
+    position: relative;
+    top: 6px;
+    width: 200;
+    height: 300; }
 
 #cast {
   text-align: center; }

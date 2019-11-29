@@ -46,14 +46,37 @@ main {
 
 }
 
+//styling on the actor profiles in the search results
+.actor{
+    img{
+        width: 200px;
+        height: 300px;
+    }
+}
+
+//styling on the movie div in the actors page
 .movie{
     margin-top: 10px;
     padding-bottom: 0;
     margin-bottom: 0;
     text-align: center;
     border: 2px solid #333;
+    img{
+        //pushing the image to the bottom of the div
+        //will find out later why there is the tiniest amout of space at the
+        //bottoom that is open
+        margin-bottom: 0;
+        position: relative;
+        top: 6px;
+
+        //set a default width and height for the image, change once
+        //this design is responsive
+        width: 200;
+        height: 300;
+    }
 }
 
+//styling for the cast on the movie detail screen
 #cast{
     text-align: center;
     img {
@@ -63,8 +86,10 @@ main {
     }
 }
 
+//styling for the movie details entire screen
 #moviedetails{
     text-align: center;
     display: flex;
     flex-direction: column;
 }
+
