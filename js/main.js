@@ -54,7 +54,7 @@ const app = {
         parent.appendChild(p);
     },
     //build an img element with only a movie object from TMDB being given
-    buildTMDBImage: (movie, size, parent) => {
+    buildMovieImage: (movie, size, parent) => {
         //set the width property of the image src query
         let width = `w${size}/`;
         
@@ -65,6 +65,22 @@ const app = {
         parent.appendChild(poster);
     },
 
+    buildActorImage: (actor, size, parent) => {
+
+        // set the width propery of the image src query:
+        let width = `w${size}`;
+
+        //create the html img element and set the correspoding attirbutes to values
+        //from actor
+        let poster = document.createElement('img');
+        poster.title = actor.name;
+        poster.alt = actor.name;
+        poster.src = app.imageBaseURL + width + actor.profile_path;
+
+        //append the image to the parent specified
+        parent.appendChild(poster);
+
+    },
     //added method to change page
     //the current page will be flipped from active
     //the new page will be flipped into active
@@ -93,10 +109,14 @@ const app = {
 
         //build the title for this page
         app.buildTitle("Movies by: " + ev.target.textContent, output);
+
+        //build the poster image for the actor:
+        app.buildActorImage(app.actorData[ev.target.getAttribute("data-actornum")], 300, output);
+
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
-        app.actorData[ev.target.getAttribute("data-actornum")].forEach(movie => {
+        app.actorData[ev.target.getAttribute("data-actornum")].known_for.forEach(movie => {
             //create the element holding the movie results
             let testMovies = document.createElement('p');
             testMovies.textContent = movie.id + " " + movie.original_title;
@@ -156,7 +176,7 @@ const app = {
                 console.log(output);
                 output.appendChild(genreText);
 
-                app.buildTMDBImage(data, 200, output);
+                app.buildMovieImage(data, 200, output);
                 
 
             }
@@ -233,7 +253,7 @@ const app = {
                         //push the movies known for each actor onto the actor movie data arry
                         //and then set a data-actor to the index location of the corresponding known for
                         //data in the app.actorData array to call it later in build movies.
-                        app.actorData.push(actor.known_for);
+                        app.actorData.push(actor);
                         d.setAttribute("data-actornum",app.actorData.length-1 );
                         d.addEventListener('click', app.buildActorPage);
                         output.appendChild(d);
