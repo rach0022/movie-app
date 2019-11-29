@@ -11,7 +11,7 @@
 <body>
     <main>
         <!-- added onsubmit property to form to make sure it will not reload the page  -->
-        <div id="searchpage">
+        <div id="searchpage" class="page active">
             <form onsubmit="return false">
                     <div class="formBox">
                     <label for="actor">Actor</label>
@@ -22,9 +22,9 @@
                     </div>
             </form>
         </div>
-        <div id="searchresults"></div>
-        <div id="moviesbyactor"></div>
-        <div id="movieresults">
+        <div id="searchresults" class="page active"></div>
+        <div id="moviesbyactor" class="page active"></div>
+        <div id="movieresults" class="page active">
             <div id="moviedetails"></div>
             <div id="cast"></div>
         </div>
