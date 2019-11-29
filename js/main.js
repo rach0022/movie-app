@@ -13,7 +13,7 @@ const app = {
     init: () => {
         console.log("the script is loaded");
         app.active = document.getElementById('searchpage');
-        document.getElementById('btn').addEventListener('click',app.search);
+        document.getElementById('search').addEventListener('click',app.search);
     },
 
     //remove all child elements from a parent element
