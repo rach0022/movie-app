@@ -155,6 +155,7 @@ const app = {
             })
     },
     search: ev => {
+        console.log("this happens" + this);
         //stop the form being submitted
         ev.preventDefault();
         ev.stopPropagation();
