@@ -24,6 +24,21 @@ const app = {
 
         //add the event listener to the search button
         document.getElementById('search').addEventListener('click', app.search);
+
+        //now to implement the history api to allow the browser back button to switch my pages
+        app.baseURL = location.href.split('#')[0];
+        let hash = location.hash;
+
+        //check the url for the current hash
+        if(hash && hash != '#'){
+            //switch the page to the new page
+            app.changePage(document.getElementById(has.replace("#","")));
+        } else {
+            //there is no url so make sure the default page is loaded
+            //it already is so do nothing at first
+            history.replaceState({},app.active.id, `${app.baseURL}#${app.active.id}`);
+        }
+
     },
 
     //remove all child elements from a parent element
