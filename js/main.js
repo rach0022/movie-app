@@ -20,7 +20,9 @@ const app = {
         app.updatePages();
 
         //add the event listener to the back button
-        document.getElementById('backbutton').addEventListener('click', app.backButton);
+        document.getElementById('backbutton').addEventListener('click', ev =>{
+            app.changePage(document.getElementById('searchpage'));
+        });
 
         //add the event listener to the search button
         document.getElementById('search').addEventListener('click', app.search);
