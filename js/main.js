@@ -397,6 +397,7 @@ const app = {
         switch(app.active){
             case app.pages[0]:
                 // the do nothing statement for the back button 
+                app.changePage(document.getElementById(location.hash.replace("#","")));
                 break;
             case app.pages[1]:
                 app.changePage(document.getElementById('searchpage'));
