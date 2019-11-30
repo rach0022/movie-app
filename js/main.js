@@ -39,6 +39,8 @@ const app = {
             history.replaceState({},app.active.id, `${app.baseURL}#${app.active.id}`);
         }
 
+        window.addEventListener('popstate', app.backButton);
+
     },
 
     //remove all child elements from a parent element
@@ -109,6 +111,9 @@ const app = {
     //the current page will be flipped from active
     //the new page will be flipped into active
     changePage: newPage=>{
+
+        //push the new state of the page to the hsitory api
+        history.pushState({}, newPage.id, `${app.baseURL}#${newPage.id}`);
         //swtich the active class onthe active page 
         app.active.classList.toggle('active');
 
