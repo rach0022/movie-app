@@ -34,7 +34,7 @@ const app = {
         //check the url for the current hash
         if(hash && hash != '#'){
             //switch the page to the new page
-            app.changePage(document.getElementById(has.replace("#","")));
+            app.changePage(document.getElementById(hash.replace("#","")));
         } else {
             //there is no url so make sure the default page is loaded
             //it already is so do nothing at first
