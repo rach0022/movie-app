@@ -1,7 +1,8 @@
 const app = {
     searchQuery: null,
     actorData: [],
-    movieID: null,
+    movieData: [],
+    movieID: 0,
     baseURL: null,
     imageBaseURL: "https://image.tmdb.org/t/p/",
     pages: [],
@@ -391,6 +392,7 @@ const app = {
                     //how to display all the actors with a name match
                     data.results.forEach(actor => {
                         let actorDiv = document.createElement('div');
+                        console.log(actor);
                         actorDiv.classList.add('actor');
 
                         app.buildActorImage(actor, 200, actorDiv);
@@ -403,6 +405,13 @@ const app = {
                         app.actorData.push(actor);
                         actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
                         actorDiv.setAttribute("data-actorname", actor.name);
+                        let data_movie_id = ""
+                        actor.known_for.forEach(movie => {
+                            app.movieData.push(actor.known_for);
+                            data_movie_id += `${app.movieID} `;
+                            app.movieID ++;
+                        });
+                        actorDiv.setAttribute("data-movieids",data_movie_id);
                         actorDiv.addEventListener('click', app.buildActorPage);
                         actorDiv.appendChild(d);
                         output.appendChild(actorDiv);
