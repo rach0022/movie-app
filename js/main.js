@@ -1,7 +1,8 @@
 const app = {
     searchQuery: null,
     actorData: [],
-    movieID: null,
+    movieData: [],
+    movieID: 0,
     baseURL: null,
     imageBaseURL: "https://image.tmdb.org/t/p/",
     pages: [],
@@ -78,8 +79,12 @@ const app = {
         let width = `w${size}/`;
         
         let poster = document.createElement('img');
-        poster.title = movie.tagline;
-        poster.alt = movie.tagline;
+        if(movie.media_type == "tv"){
+            poster.title = movie.name;
+        } else {
+            poster.title = movie.title;
+        }
+        poster.alt = movie.overview;
         if(movie.poster_path){
             poster.src = app.imageBaseURL + width + movie.poster_path;
         } else {
@@ -147,7 +152,8 @@ const app = {
         //first stop the form from submitting accidentally
         ev.preventDefault();
         ev.stopPropagation();
-        console.log(app.actorData[ev.currentTarget.getAttribute("data-actornum")]);
+        let clicked = ev.currentTarget;
+        console.log(app.actorData[clicked.getAttribute("data-actornum")]);
 
         //first get a reference to the proper output div and remove all children within it
         let targetDiv= document.getElementById('actordetails');
@@ -158,19 +164,27 @@ const app = {
         app.changePage(targetDiv);
 
         //build the title for this page
-        app.buildTitle(ev.currentTarget.getAttribute("data-actorname"), output);
+        app.buildTitle(clicked.getAttribute("data-actorname"), output);
 
         //build the poster image for the actor:
-        console.log(ev.currentTarget.getAttribute("data-actornum"));
-        app.buildActorImage(app.actorData[ev.currentTarget.getAttribute("data-actornum")], 300, output);
+        console.log(clicked.getAttribute("data-actornum"));
+        app.buildActorImage(app.actorData[clicked.getAttribute("data-actornum")], 300, output);
 
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
         app.buildTitle("Most Popular Movies:", output);
-        app.actorData[ev.currentTarget.getAttribute("data-actornum")].known_for.forEach(movie => {
+
+        //create a movie_counter to get the right split value for the movie id to each single movie div
+        let movie_counter = 0
+        app.actorData[clicked.getAttribute("data-actornum")].known_for.forEach(movie => {
             //now create a movie div to add the movies too
             let movieDiv = document.createElement('div');
+
+            //set the internal app ids for each movie to the 
+            movieDiv.setAttribute("data-movieid",clicked.getAttribute("data-movieids").split(" ")[movie_counter]);
+            movie_counter++;
+            
             movieDiv.classList.add('movie');
             //create the element holding the movie results
             let testMovies = document.createElement('p');
@@ -184,8 +198,6 @@ const app = {
                     testMovies.textContent = movie.title;
                     break;
             }
-            movieDiv.setAttribute("data-movieid", movie.id);
-
             //add a click listener to test if movies can generate movie & cast data
             movieDiv.addEventListener('click', app.buildMoviePage);
             movieDiv.appendChild(testMovies);
@@ -284,9 +296,9 @@ const app = {
         let movieDiv = document.createElement('div');
         movieDiv.id = 'moviedetails';
         let castDiv = document.createElement('div');
-        castDiv.id = 'cast';
+        movieDiv.id = 'cast';
 
-        //then clear the results
+        //then clear the old results
         app.removeElements(targetDiv);
 
         //now build first the movie page with poster for a movie
@@ -294,13 +306,14 @@ const app = {
         app.buildElement("Original Air Date: " + tvData.first_air_date,"p",movieDiv);
         app.buildMovieImage(tvData, 200,movieDiv);
         app.buildElement(tvData.overview, "p", movieDiv);
+        app.buildTitle(tvData.media_type.toUpperCase(), castDiv);
 
-        app.buildTitle(`Created By:\n`,castDiv);
-        //now build the "cast" section now changed to created by
-        tvData.created_by.forEach(director =>{
-            app.buildElement(director.name,'p', castDiv);
-            app.buildActorImage(director, 200, castDiv);
-        })
+        // app.buildTitle(`Created By:\n`,castDiv);
+        // //now build the "cast" section now changed to created by
+        // tvData.created_by.forEach(director =>{
+        //     app.buildElement(director.name,'p', castDiv);
+        //     app.buildActorImage(director, 200, castDiv);
+        // })
         output.appendChild(movieDiv);
         output.appendChild(castDiv);
         targetDiv.appendChild(output);
@@ -322,14 +335,16 @@ const app = {
         if(ev.currentTarget.classList.contains("tv")){
             //currently nothing happens as the user is trying to load a tv show
             //first set the tv url and then do the fetch call for the tv
-            let tvUrl = `https://api.themoviedb.org/3/tv/${app.movieID}?api_key=${app.apiKey}`;
-            fetch(tvUrl)
-                .then(response => response.json())
-                .then(app.buildTvPage)
-                .catch(err =>{
-                    console.log(err.message);
-                    alert(`Sorry an error has occured while collecting the tv show data | Error Details: ${err.message}`);
-                })
+            // let tvUrl = `https://api.themoviedb.org/3/tv/${app.movieID}?api_key=${app.apiKey}`;
+            // fetch(tvUrl)
+            //     .then(response => response.json())
+            //     .then(app.buildTvPage)
+            //     .catch(err =>{
+            //         console.log(err.message);
+            //         alert(`Sorry an error has occured while collecting the tv show data | Error Details: ${err.message}`);
+            //     })
+            console.log("this is the tvshow data from internal array",app.movieData[app.movieID]);
+            app.buildTvPage(app.movieData[app.movieID]);
         } else {
             let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
             let castURL = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`);
@@ -351,7 +366,7 @@ const app = {
                 .catch(err => {
                     console.log(err.message);
                     alert(`Sorry an error has occured while collecting the movie data | Error Details: ${err.message}`);
-                })
+                });
         }
     },
     search: ev => {
@@ -391,6 +406,7 @@ const app = {
                     //how to display all the actors with a name match
                     data.results.forEach(actor => {
                         let actorDiv = document.createElement('div');
+                        console.log(actor);
                         actorDiv.classList.add('actor');
 
                         app.buildActorImage(actor, 200, actorDiv);
@@ -403,6 +419,16 @@ const app = {
                         app.actorData.push(actor);
                         actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
                         actorDiv.setAttribute("data-actorname", actor.name);
+                        let data_movie_id = "";
+                        let data_tmdb_id = "";
+                        actor.known_for.forEach(movie => {
+                            app.movieData.push(movie);
+                            data_movie_id += `${app.movieID} `;
+                            data_tmdb_id += `${movie.id} `;
+                            app.movieID ++;
+                        });
+                        actorDiv.setAttribute("data-movieids",data_movie_id);
+                        actorDiv.setAttribute("data-tmdb-id", data_tmdb_id);
                         actorDiv.addEventListener('click', app.buildActorPage);
                         actorDiv.appendChild(d);
                         output.appendChild(actorDiv);
