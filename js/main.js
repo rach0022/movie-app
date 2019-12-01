@@ -390,7 +390,6 @@ const app = {
 
                     //how to display all the actors with a name match
                     data.results.forEach(actor => {
-                        console.log("this happebed");
                         let actorDiv = document.createElement('div');
                         actorDiv.classList.add('actor');
 
