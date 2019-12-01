@@ -131,6 +131,14 @@ const app = {
             left: 0,
             behavior: 'smooth'
         });
+
+        //check if the newpage is the search page
+        //make the backbutton zindex 200 when it isnt or 0 when it is
+        if(newPage == app.pages[0]){
+            document.getElementById('backbutton').style.opacity = 0;
+        } else {
+            document.getElementById('backbutton').style.opacity = 1;
+        }
     },
     buildActorPage: ev => {
         //this is where we build the actor data for page 3

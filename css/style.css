@@ -44,6 +44,7 @@ html {
 
 #backbutton {
   z-index: 200;
+  opacity: 0;
   width: 70px;
   height: 70px;
   font-size: 25px;
