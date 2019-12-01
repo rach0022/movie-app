@@ -366,7 +366,7 @@ const app = {
                 .catch(err => {
                     console.log(err.message);
                     alert(`Sorry an error has occured while collecting the movie data | Error Details: ${err.message}`);
-                })
+                });
         }
     },
     search: ev => {
@@ -419,15 +419,16 @@ const app = {
                         app.actorData.push(actor);
                         actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
                         actorDiv.setAttribute("data-actorname", actor.name);
-                        let data_movie_counter = 0;
                         let data_movie_id = "";
+                        let data_tmdb_id = "";
                         actor.known_for.forEach(movie => {
-                            app.movieData.push(actor.known_for[data_movie_counter]);
+                            app.movieData.push(movie);
                             data_movie_id += `${app.movieID} `;
+                            data_tmdb_id += `${movie.id} `;
                             app.movieID ++;
-                            data_movie_counter ++;
                         });
                         actorDiv.setAttribute("data-movieids",data_movie_id);
+                        actorDiv.setAttribute("data-tmdb-id", data_tmdb_id);
                         actorDiv.addEventListener('click', app.buildActorPage);
                         actorDiv.appendChild(d);
                         output.appendChild(actorDiv);
