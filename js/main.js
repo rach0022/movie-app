@@ -226,26 +226,21 @@ const app = {
                 //create the title for the page
                 app.buildTitle(`Title: ${data.title}`, output);
                 
+                //build the movie poster image
+                app.buildMovieImage(data, 200, output);
 
+                //show some movie details
+                app.buildElement(`Released: ${data.release_date}`, 'p', output)
+
+                //show the genres
                 //get all the genres and display them under the movie
                 let genreText = document.createElement('p');
                 genreText.textContent = "Genres: ";
-                if(data.genres){
-                    data.genres.forEach(genre =>{
-                        genreText.textContent += genre.name + " ";
-                    });
-                    output.appendChild(genreText);
-                } else {
-                    genreText += "Not Found";
-                    //since genre is underfined, remove the cast from the page
-                    //because without genre it is usually a tv show and has no cast property
-                    //i dont use output method because i want to keep the reference
-                    //that already exist for output
-                    app.removeElements(document.getElementById('cast'));
-                    app.buildTitle("Cast Members:\nUndefined", document.getElementById('cast'));
-                }
-                app.buildMovieImage(data, 200, output);
-                app.buildElement(`Released: ${data.release_date}`, 'p', output)
+                data.genres.forEach(genre =>{
+                    genreText.textContent += genre.name + " ";
+                });
+                output.appendChild(genreText);
+                //show the movie overview
                 app.buildElement(`Overview: ${data.overview}`,'p', output);
         }})
         .catch(err =>{
