@@ -190,7 +190,9 @@ const app = {
 
         //first set the output to the proper div
         //and remove any elemnts from this div
-        let output = document.getElementById('movieresults');
+        let targetDiv = document.getElementById('movieresults');
+        app.removeElements(targetDiv);
+        let output = document.createDocumentFragment();
         moviePromise.then(data => {
 
             //first check if it is movie data or cast data:
@@ -200,39 +202,40 @@ const app = {
             //incase the cast data is remaining for another movie
             if(data.cast){
                 //first set the proper output and clear whatever is there
-                output = document.getElementById('cast');
-                app.removeElements(output);
+                // output = document.getElementById('cast');
+                let castDiv = document.createElement('div');
+                castDiv.id = 'cast';
+
                 //this is where we build the cast data for page 4
                 //set a title to show the cast
-                app.buildTitle("Cast Members:", output);
+                app.buildTitle("Cast Members:", castDiv);
                 //if it is cast data loop through each cast member and build a name
                 data.cast.forEach(member => {
                     //build an img for each cast member and show the actors name and character
-                    app.buildActorImage(member, 200, output);
-                    app.buildElement(`Cast #${member.cast_id} ${member.name} | Character in movie: ${member.character}`, 'p', output);
+                    app.buildActorImage(member, 200, castDiv);
+                    app.buildElement(`Cast #${member.cast_id} ${member.name} | Character in movie: ${member.character}`, 'p', castDiv);
 
                 });
                 console.log("cast data:", data.cast);
-                
-
-                // data.cast.forea 
+                output.appendChild(castDiv);
+                targetDiv.appendChild(output);
             } else {
                 //first set the proper output  of movie details and clear whatever is there
-                output = document.getElementById('moviedetails');
-                app.removeElements(output);
-
+                // output = document.getElementById('moviedetails');
+                let movieDiv = document.createElement('div');
+                movieDiv.id = 'moviedetails';
 
                 //this is where we build the movie data for the page 4
                 console.log("movie data", data);
 
                 //create the title for the page
-                app.buildTitle(`Title: ${data.title}`, output);
+                app.buildTitle(`Title: ${data.title}`, movieDiv);
                 
                 //build the movie poster image
-                app.buildMovieImage(data, 200, output);
+                app.buildMovieImage(data, 200, movieDiv);
 
                 //show some movie details
-                app.buildElement(`Released: ${data.release_date}`, 'p', output)
+                app.buildElement(`Released: ${data.release_date}`, 'p', movieDiv)
 
                 //show the genres
                 //get all the genres and display them under the movie
@@ -241,17 +244,20 @@ const app = {
                 data.genres.forEach(genre =>{
                     genreText.textContent += genre.name + " ";
                 });
-                output.appendChild(genreText);
+                movieDiv.appendChild(genreText);
                 //show the movie overview
-                app.buildElement(`Overview: ${data.overview}`,'p', output);
-        }})
+                app.buildElement(`Overview: ${data.overview}`,'p', movieDiv);
+                output.appendChild(movieDiv);
+                targetDiv.appendChild(output);
+            }
+    })
         .catch(err =>{
             console.log("error occured:",err.message);
             alert(`Sorry an error has occured while collecting the movie data | Error Details: ${err.message}`);
 
         })
         //change the active page style and set the active page in the app
-        app.changePage(output);
+        app.changePage(targetDiv);
         console.log(moviePromise);
     },
 
@@ -261,15 +267,19 @@ const app = {
     buildTvPage: tvData=>{
 
         //reference to output div for this page
-        let output = document.getElementById('movieresults');
+        let output = document.createDocumentFragment();
+        let targetDiv = document.getElementById('movieresults');
 
         //get a reference to the proper divs in the movie details
-        let movieDiv = document.getElementById('moviedetails');
-        let castDiv = document.getElementById('cast');
+        // let movieDiv = document.getElementById('moviedetails');
+        // let castDiv = document.getElementById('cast');
+        let movieDiv = document.createElement('div');
+        movieDiv.id = 'moviedetails';
+        let castDiv = document.createElement('div');
+        castDiv.id = 'cast';
 
         //then clear the results
-        app.removeElements(movieDiv);
-        app.removeElements(castDiv);
+        app.removeElements(targetDiv);
 
         //now build first the movie page with poster for a movie
         app.buildTitle(tvData.name, movieDiv);
@@ -283,7 +293,10 @@ const app = {
             app.buildElement(director.name,'p', castDiv);
             app.buildActorImage(director, 200, castDiv);
         })
-        app.changePage(output);
+        output.appendChild(movieDiv);
+        output.appendChild(castDiv);
+        targetDiv.appendChild(output);
+        app.changePage(targetDiv);
     },
 
     //call this function when you need to build teh movie page and also cast details for that movie
