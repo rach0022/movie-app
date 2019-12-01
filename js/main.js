@@ -79,8 +79,12 @@ const app = {
         let width = `w${size}/`;
         
         let poster = document.createElement('img');
-        poster.title = movie.tagline;
-        poster.alt = movie.tagline;
+        if(movie.media_type == "tv"){
+            poster.title = movie.name;
+        } else {
+            poster.title = movie.title;
+        }
+        poster.alt = movie.overview;
         if(movie.poster_path){
             poster.src = app.imageBaseURL + width + movie.poster_path;
         } else {
@@ -148,7 +152,8 @@ const app = {
         //first stop the form from submitting accidentally
         ev.preventDefault();
         ev.stopPropagation();
-        console.log(app.actorData[ev.currentTarget.getAttribute("data-actornum")]);
+        let clicked = ev.currentTarget;
+        console.log(app.actorData[clicked.getAttribute("data-actornum")]);
 
         //first get a reference to the proper output div and remove all children within it
         let targetDiv= document.getElementById('actordetails');
@@ -159,19 +164,27 @@ const app = {
         app.changePage(targetDiv);
 
         //build the title for this page
-        app.buildTitle(ev.currentTarget.getAttribute("data-actorname"), output);
+        app.buildTitle(clicked.getAttribute("data-actorname"), output);
 
         //build the poster image for the actor:
-        console.log(ev.currentTarget.getAttribute("data-actornum"));
-        app.buildActorImage(app.actorData[ev.currentTarget.getAttribute("data-actornum")], 300, output);
+        console.log(clicked.getAttribute("data-actornum"));
+        app.buildActorImage(app.actorData[clicked.getAttribute("data-actornum")], 300, output);
 
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
         app.buildTitle("Most Popular Movies:", output);
-        app.actorData[ev.currentTarget.getAttribute("data-actornum")].known_for.forEach(movie => {
+
+        //create a movie_counter to get the right split value for the movie id to each single movie div
+        let movie_counter = 0
+        app.actorData[clicked.getAttribute("data-actornum")].known_for.forEach(movie => {
             //now create a movie div to add the movies too
             let movieDiv = document.createElement('div');
+
+            //set the internal app ids for each movie to the 
+            movieDiv.setAttribute("data-movieid",clicked.getAttribute("data-movieids").split(" ")[movie_counter]);
+            movie_counter++;
+            
             movieDiv.classList.add('movie');
             //create the element holding the movie results
             let testMovies = document.createElement('p');
@@ -185,8 +198,6 @@ const app = {
                     testMovies.textContent = movie.title;
                     break;
             }
-            movieDiv.setAttribute("data-movieid", movie.id);
-
             //add a click listener to test if movies can generate movie & cast data
             movieDiv.addEventListener('click', app.buildMoviePage);
             movieDiv.appendChild(testMovies);
