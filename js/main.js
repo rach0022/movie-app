@@ -311,6 +311,20 @@ const app = {
             app.buildElement(director.name,'p', castDiv);
             app.buildActorImage(director, 200, castDiv);
         })
+
+        //now make another fetch call to TMDB to get cast data "credits"
+        app.buildTitle("Credits:", castDiv);
+        let castUrl = `https://api.themoviedb.org/3/tv/${app.movieID}/credits?api_key=${app.apiKey}`;
+        
+        //fetch the credit data:
+        fetch(castUrl)
+            .then(response => response.json())
+            .then(credits => {
+                console.log(credits);
+            })
+            .catch(err =>{
+                alert(`Sorry an error has occured while collecting credits data for ${tvData.name} | Error Details: ${err.message}`);
+            })
         output.appendChild(movieDiv);
         output.appendChild(castDiv);
         targetDiv.appendChild(output);
