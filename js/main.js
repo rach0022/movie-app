@@ -200,9 +200,8 @@ const app = {
 
         //first set the output to the proper div
         //and remove any elemnts from this div
-        let targetDiv = document.getElementById('movieresults');
-        app.removeElements(targetDiv);
-        let output = document.createDocumentFragment();
+        let moviePage = document.getElementById('movieresults');
+        // let output = document.createDocumentFragment();
         moviePromise.then(data => {
 
             //first check if it is movie data or cast data:
@@ -211,10 +210,11 @@ const app = {
             //also check if the data.cast is null and remove all elements
             //incase the cast data is remaining for another movie
             if(data.cast){
+                targetDiv = document.getElementById('cast');
+                app.removeElements(targetDiv);
                 //first set the proper output and clear whatever is there
                 // output = document.getElementById('cast');
-                let castDiv = document.createElement('div');
-                castDiv.id = 'cast';
+                let castDiv = document.createDocumentFragment();
 
                 //this is where we build the cast data for page 4
                 //set a title to show the cast
@@ -227,13 +227,13 @@ const app = {
 
                 });
                 console.log("cast data:", data.cast);
-                output.appendChild(castDiv);
-                targetDiv.appendChild(output);
+                targetDiv.appendChild(castDiv);
             } else {
                 //first set the proper output  of movie details and clear whatever is there
+                targetDiv = document.getElementById('moviedetails');
+                app.removeElements(targetDiv);
                 // output = document.getElementById('moviedetails');
-                let movieDiv = document.createElement('div');
-                movieDiv.id = 'moviedetails';
+                let movieDiv = document.createDocumentFragment();
 
                 //this is where we build the movie data for the page 4
                 console.log("movie data", data);
@@ -257,8 +257,7 @@ const app = {
                 movieDiv.appendChild(genreText);
                 //show the movie overview
                 app.buildElement(`Overview: ${data.overview}`,'p', movieDiv);
-                output.appendChild(movieDiv);
-                targetDiv.appendChild(output);
+                targetDiv.appendChild(movieDiv);
             }
     })
         .catch(err =>{
@@ -267,7 +266,7 @@ const app = {
 
         })
         //change the active page style and set the active page in the app
-        app.changePage(targetDiv);
+        app.changePage(moviePage);
         console.log(moviePromise);
     },
 
