@@ -224,7 +224,8 @@ const app = {
                 console.log("movie data", data);
 
                 //create the title for the page
-                app.buildTitle(`Released: ${data.release_date} Title: ${data.title}`, output);
+                app.buildTitle(`Title: ${data.title}`, output);
+                
 
                 //get all the genres and display them under the movie
                 let genreText = document.createElement('p');
@@ -244,6 +245,8 @@ const app = {
                     app.buildTitle("Cast Members:\nUndefined", document.getElementById('cast'));
                 }
                 app.buildMovieImage(data, 200, output);
+                app.buildElement(`Released: ${data.release_date}`, 'p', output)
+                app.buildElement(`Overview: ${data.overview}`,'p', output);
         }})
         .catch(err =>{
             console.log("error occured:",err.message);
