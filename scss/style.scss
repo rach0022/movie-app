@@ -5,7 +5,8 @@ html {
     background-color: $bg-accent-color;
 }
 
-// taken from simple spa demo, page and active class idea 
+// taken from simple spa demo, page and active class idea
+//mobile first display, then make media queries for larger screens
 .page {
     box-sizing: border-box;
     min-height: 100vh;
@@ -13,10 +14,7 @@ html {
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex(column, center);
     opacity: 0;
     z-index: 1;
     color: $text-color;
@@ -26,10 +24,7 @@ html {
     }
     background-color: $bg-accent-color;
     form{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        @include flex(column, center);
         color: $card-color;
         background-color: $bg-color;
         padding: 10vw;
@@ -74,7 +69,7 @@ html {
 
     position: fixed;
     top: 85vh;
-    left: 85vw;
+    left: 78vw;
 
 }
 
