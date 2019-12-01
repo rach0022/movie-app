@@ -248,6 +248,9 @@ const app = {
                 //build the movie poster image
                 app.buildMovieImage(data, 200, movieDiv);
 
+                //set the tagline under the movie image
+                app.buildElement(data.tagline, 'p', movieDiv);
+
                 //show some movie details
                 app.buildElement(`Released: ${data.release_date}`, 'p', movieDiv)
 
