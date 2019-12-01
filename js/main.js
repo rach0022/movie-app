@@ -172,7 +172,6 @@ const app = {
             //now create a movie div to add the movies too
             let movieDiv = document.createElement('div');
             movieDiv.classList.add('movie');
-            
             //create the element holding the movie results
             let testMovies = document.createElement('p');
             console.log(movie);
@@ -374,7 +373,7 @@ const app = {
         app.searchQuery = document.getElementById('actor').value;
         console.log("You searched:",app.searchQuery);
 
-        app.buildTitle("You Searched: " + app.searchQuery, output);
+        app.buildTitle("You Searched: " + app.searchQuery, targetDiv);
 
         //old way to reset form
         // document.forms[0].reset();
@@ -391,6 +390,7 @@ const app = {
 
                     //how to display all the actors with a name match
                     data.results.forEach(actor => {
+                        console.log("this happebed");
                         let actorDiv = document.createElement('div');
                         actorDiv.classList.add('actor');
 
