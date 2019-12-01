@@ -61,11 +61,11 @@ html {
     font-size: 25px;
 
     //make button bright red for now
-    background-color: #278231;
+    background-color: $card-color;
 
     //make button a circle and give it a box shadow to look like its floating
     border-radius: 50%;
-    box-shadow: 0 6px 10px 0 #333;
+    box-shadow: 0 6px 10px 0 $text-color;
 
     position: fixed;
     top: 85vh;
@@ -87,7 +87,10 @@ html {
     padding-bottom: 0;
     margin-bottom: 0;
     text-align: center;
-    border: 2px solid #333;
+    border: 2px solid $text-color;
+
+    width: inherit;
+
     img{
         //pushing the image to the bottom of the div
         //will find out later why there is the tiniest amout of space at the

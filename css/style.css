@@ -47,9 +47,9 @@ html {
   width: 70px;
   height: 70px;
   font-size: 25px;
-  background-color: #278231;
+  background-color: #66FCF1;
   border-radius: 50%;
-  box-shadow: 0 6px 10px 0 #333;
+  box-shadow: 0 6px 10px 0 #C5C6C7;
   position: fixed;
   top: 85vh;
   left: 78vw; }
@@ -63,7 +63,8 @@ html {
   padding-bottom: 0;
   margin-bottom: 0;
   text-align: center;
-  border: 2px solid #333; }
+  border: 2px solid #C5C6C7;
+  width: inherit; }
   .movie img {
     margin-bottom: 0;
     position: relative;

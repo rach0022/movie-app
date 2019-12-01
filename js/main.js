@@ -167,11 +167,11 @@ const app = {
             console.log(movie);
             switch(movie.media_type){
                 case "tv":
-                    testMovies.textContent = movie.id + " " + movie.name;
+                    testMovies.textContent = movie.name;
                     movieDiv.classList.add("tv");
                     break;
                 case "movie":
-                    testMovies.textContent = movie.id + " " + movie.title;
+                    testMovies.textContent = movie.title;
                     break;
             }
             movieDiv.setAttribute("data-movieid", movie.id);
@@ -247,6 +247,7 @@ const app = {
         }})
         .catch(err =>{
             console.log("error occured:",err.message);
+            alert(`Sorry an error has occured while collecting the movie data | Error Details: ${err.message}`);
 
         })
         //change the active page style and set the active page in the app
@@ -306,6 +307,7 @@ const app = {
                 .then(app.buildTvPage)
                 .catch(err =>{
                     console.log(err.message);
+                    alert(`Sorry an error has occured while collecting the tv show data | Error Details: ${err.message}`);
                 })
         } else {
             let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
@@ -327,6 +329,7 @@ const app = {
                 })
                 .catch(err => {
                     console.log(err.message);
+                    alert(`Sorry an error has occured while collecting the movie data | Error Details: ${err.message}`);
                 })
         }
     },
@@ -385,6 +388,7 @@ const app = {
                 })
                 .catch(err => {
                     console.log(err.message);
+                    alert(`Sorry an error has occured while collecting the actor data | Error Details: ${err.message}`);
                 });
         }
     },
