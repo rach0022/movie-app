@@ -281,7 +281,7 @@ const app = {
     //because tv shows have different properties than movies
     //need to make specific page to deal with tvData
     buildTvPage: tvData=>{
-
+        console.log(tvData);
         //reference to output div for this page
         let output = document.createDocumentFragment();
         let targetDiv = document.getElementById('movieresults');
@@ -301,6 +301,8 @@ const app = {
         app.buildTitle(tvData.name, movieDiv);
         app.buildElement("Original Air Date: " + tvData.first_air_date,"p",movieDiv);
         app.buildMovieImage(tvData, 200,movieDiv);
+        app.buildElement(`Number of Seasons: ${tvData.number_of_seasons} | Number of Episodes: ${tvData.number_of_episodes}`, 'p', movieDiv);
+        // app.buildElement(`Number of Episodes: ${tvData.number_of_episodes}`, 'p', movieDiv);
         app.buildElement(tvData.overview, "p", movieDiv);
 
         app.buildTitle(`Created By:\n`,castDiv);
