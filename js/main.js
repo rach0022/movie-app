@@ -296,9 +296,9 @@ const app = {
         let movieDiv = document.createElement('div');
         movieDiv.id = 'moviedetails';
         let castDiv = document.createElement('div');
-        castDiv.id = 'cast';
+        movieDiv.id = 'cast';
 
-        //then clear the results
+        //then clear the old results
         app.removeElements(targetDiv);
 
         //now build first the movie page with poster for a movie
@@ -306,13 +306,14 @@ const app = {
         app.buildElement("Original Air Date: " + tvData.first_air_date,"p",movieDiv);
         app.buildMovieImage(tvData, 200,movieDiv);
         app.buildElement(tvData.overview, "p", movieDiv);
+        app.buildTitle(tvData.media_type.toUpperCase(), castDiv);
 
-        app.buildTitle(`Created By:\n`,castDiv);
-        //now build the "cast" section now changed to created by
-        tvData.created_by.forEach(director =>{
-            app.buildElement(director.name,'p', castDiv);
-            app.buildActorImage(director, 200, castDiv);
-        })
+        // app.buildTitle(`Created By:\n`,castDiv);
+        // //now build the "cast" section now changed to created by
+        // tvData.created_by.forEach(director =>{
+        //     app.buildElement(director.name,'p', castDiv);
+        //     app.buildActorImage(director, 200, castDiv);
+        // })
         output.appendChild(movieDiv);
         output.appendChild(castDiv);
         targetDiv.appendChild(output);
@@ -334,14 +335,16 @@ const app = {
         if(ev.currentTarget.classList.contains("tv")){
             //currently nothing happens as the user is trying to load a tv show
             //first set the tv url and then do the fetch call for the tv
-            let tvUrl = `https://api.themoviedb.org/3/tv/${app.movieID}?api_key=${app.apiKey}`;
-            fetch(tvUrl)
-                .then(response => response.json())
-                .then(app.buildTvPage)
-                .catch(err =>{
-                    console.log(err.message);
-                    alert(`Sorry an error has occured while collecting the tv show data | Error Details: ${err.message}`);
-                })
+            // let tvUrl = `https://api.themoviedb.org/3/tv/${app.movieID}?api_key=${app.apiKey}`;
+            // fetch(tvUrl)
+            //     .then(response => response.json())
+            //     .then(app.buildTvPage)
+            //     .catch(err =>{
+            //         console.log(err.message);
+            //         alert(`Sorry an error has occured while collecting the tv show data | Error Details: ${err.message}`);
+            //     })
+            console.log("this is the tvshow data from internal array",app.movieData[app.movieID]);
+            app.buildTvPage(app.movieData[app.movieID]);
         } else {
             let movieUrl = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}?api_key=${app.apiKey}`);
             let castURL = fetch(`https://api.themoviedb.org/3/movie/${app.movieID}/credits?api_key=${app.apiKey}`);
@@ -416,11 +419,13 @@ const app = {
                         app.actorData.push(actor);
                         actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
                         actorDiv.setAttribute("data-actorname", actor.name);
-                        let data_movie_id = ""
+                        let data_movie_counter = 0;
+                        let data_movie_id = "";
                         actor.known_for.forEach(movie => {
-                            app.movieData.push(actor.known_for);
+                            app.movieData.push(actor.known_for[data_movie_counter]);
                             data_movie_id += `${app.movieID} `;
                             app.movieID ++;
+                            data_movie_counter ++;
                         });
                         actorDiv.setAttribute("data-movieids",data_movie_id);
                         actorDiv.addEventListener('click', app.buildActorPage);
