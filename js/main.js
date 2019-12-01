@@ -142,11 +142,12 @@ const app = {
         console.log(app.actorData[ev.currentTarget.getAttribute("data-actornum")]);
 
         //first get a reference to the proper output div and remove all children within it
-        let output = document.getElementById('actordetails');
-        app.removeElements(output);
+        let targetDiv= document.getElementById('actordetails');
+        let output = document.createDocumentFragment();
+        app.removeElements(targetDiv);
 
         //change the current page and the properties in the app
-        app.changePage(output);
+        app.changePage(targetDiv);
 
         //build the title for this page
         app.buildTitle(ev.currentTarget.getAttribute("data-actorname"), output);
@@ -183,6 +184,7 @@ const app = {
             movieDiv.appendChild(testMovies);
             app.buildMovieImage(movie, 200, movieDiv);
             output.appendChild(movieDiv);
+            targetDiv.appendChild(output);
         })
     },
     //build a function to process the movie data from the double fetch promise all call
