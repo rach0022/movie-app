@@ -78,8 +78,13 @@ const app = {
         let width = `w${size}/`;
         
         let poster = document.createElement('img');
-        poster.title = movie.tagline;
-        poster.alt = movie.tagline;
+        if(movie.media_type == "tv"){
+            poster.alt = movie.name;
+            
+        } else {
+            poster.alt = movie.title;
+        }
+        poster.title = movie.overview;
         if(movie.poster_path){
             poster.src = app.imageBaseURL + width + movie.poster_path;
         } else {
