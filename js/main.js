@@ -341,12 +341,13 @@ const app = {
         //first get a reference to the proper output div
         //and then remove all the children from the div
         //and then switch the reference of the current page
-        let output = document.getElementById('searchresults');
-        app.changePage(output);
-        app.removeElements(output);
+        let targetDiv = document.getElementById('searchresults');
+        let output = document.createDocumentFragment();
+        app.changePage(targetDiv);
+        app.removeElements(targetDiv);
 
         //switch the active page to the output div
-        app.active = output;
+        app.active = targetDiv;
 
         app.searchQuery = document.getElementById('actor').value;
         console.log("You searched:",app.searchQuery);
@@ -384,6 +385,7 @@ const app = {
                         actorDiv.addEventListener('click', app.buildActorPage);
                         actorDiv.appendChild(d);
                         output.appendChild(actorDiv);
+                        targetDiv.appendChild(output);
                     })
                 })
                 .catch(err => {
