@@ -55,9 +55,12 @@ html {
   top: 85vh;
   left: 78vw; }
 
-.actor img {
-  width: 200px;
-  height: 300px; }
+.actor {
+  float: left; }
+  .actor img {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px; }
 
 .movie {
   margin-top: 10px;
