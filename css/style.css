@@ -56,6 +56,16 @@ header {
   margin: 0;
   position: fixed; }
 
+#actordetails h3 {
+  width: 100%;
+  border: 4px solid #66FCF1;
+  border-left: 0;
+  border-right: 0;
+  color: #66FCF1;
+  text-align: center;
+  font-weight: 300;
+  font-size: 40px; }
+
 #backbutton {
   z-index: 200;
   opacity: 0;

@@ -63,6 +63,20 @@ header{
     position: fixed;
 }
 
+#actordetails{
+    h3{
+        width: 100%;
+        border: 4px solid $card-color;
+        //make sure border does not extend past view to prevent horizontal scroll issue
+        border-left: 0;
+        border-right: 0;
+        color: $card-color;
+        text-align: center;
+        font-weight: 300;
+        font-size: 40px;
+    }
+}
+
 #backbutton{
     z-index: 200;
     opacity: 0;
