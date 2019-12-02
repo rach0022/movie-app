@@ -118,6 +118,8 @@ header{
     margin-bottom: 0;
     text-align: center;
     border: 2px solid $text-color;
+    display: flex;
+    @include flex(column, center);
 
     width: inherit;
 
@@ -135,6 +137,7 @@ header{
         height: 300;
     }
     i{
+        color: $card-color;
         width: 200px;
         position: relative;
         top: -10px;
