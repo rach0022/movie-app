@@ -195,6 +195,11 @@ const app = {
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
         app.buildTitle("Most Popular Movies:", output);
+
+        //create a known-for div to hold all actors media known for
+
+        let known_forDiv = document.createElement('div');
+        known_forDiv.classList.add("moviesby");
         app.actorData[data_actornum].known_for.forEach(movie => {
             //now create a movie div to add the movies too
             let movieDiv = document.createElement('div');
@@ -224,7 +229,8 @@ const app = {
             movieDiv.appendChild(testMovies);
             app.buildMovieImage(movie, 200, movieDiv);
             movieDiv.appendChild(icon);
-            output.appendChild(movieDiv);
+            known_forDiv.appendChild(movieDiv);
+            output.appendChild(known_forDiv);
             targetDiv.appendChild(output);
         })
     },
