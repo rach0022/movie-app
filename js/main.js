@@ -465,6 +465,9 @@ const app = {
                     alert(`Sorry an error has occured while collecting the actor data | Error Details: ${err.message}`);
                 });
         }
+
+        //blur the event so android will stop showing the keyboard
+        document.querySelector('.formbox').blur();
     },
     backButton: ev => {
         //stop any default acations from the button occuring:
