@@ -436,7 +436,8 @@ const app = {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-
+                    let actor_results = document.createElement('div');
+                    actor_results.classList.add("results");
                     //how to display all the actors with a name match
                     data.results.forEach(actor => {
                         let actorDiv = document.createElement('div');
@@ -454,9 +455,10 @@ const app = {
                         actorDiv.setAttribute("data-actorname", actor.name);
                         actorDiv.addEventListener('click', app.buildActorPage);
                         actorDiv.appendChild(d);
-                        output.appendChild(actorDiv);
-                        targetDiv.appendChild(output);
+                        actor_results.appendChild(actorDiv);
                     })
+                    output.appendChild(actor_results);
+                    targetDiv.appendChild(output);
                 })
                 .catch(err => {
                     console.log(err.message);
