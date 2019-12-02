@@ -229,7 +229,7 @@ const app = {
                     let actorDiv = document.createElement('div');
                     actorDiv.classList.add("actor-credit");
                     app.buildActorImage(member, 200, actorDiv);
-                    app.buildElement(`${member.name} | Character in movie: ${member.character}`, 'p', actorDiv);
+                    app.buildElement(`${member.name} Playing: ${member.character}`, 'p', actorDiv);
                     castDiv.appendChild(actorDiv);
 
                 });
@@ -310,10 +310,18 @@ const app = {
 
         app.buildTitle(`Created By:\n`,castDiv);
         //now build the "cast" section now changed to created by
+        
+        let tv_createdbyDiv = document.createElement('div');
+        tv_createdbyDiv.id = 'tv_creators';
         tvData.created_by.forEach(director =>{
-            app.buildElement(director.name,'p', castDiv);
-            app.buildActorImage(director, 200, castDiv);
+            let creatorDiv = document.createElement('div');
+            creatorDiv.classList.add("creator");
+            app.buildActorImage(director, 200, creatorDiv);
+            app.buildElement(director.name,'p', creatorDiv);
+            
+            tv_createdbyDiv.appendChild(creatorDiv)
         })
+        castDiv.appendChild(tv_createdbyDiv);
 
         //now make another fetch call to TMDB to get cast data "credits"
         app.buildTitle("Credits:", castDiv);
@@ -328,7 +336,7 @@ const app = {
                     let actorDiv = document.createElement('div');
                     actorDiv.classList.add("actor-credit");
                     app.buildActorImage(member, 200, actorDiv);
-                    app.buildElement(`${member.name} | Character in movie: ${member.character}`, 'p', actorDiv);
+                    app.buildElement(`${member.name} Playing: ${member.character}`, 'p', actorDiv);
                     castDiv.appendChild(actorDiv);
                 });
             })
