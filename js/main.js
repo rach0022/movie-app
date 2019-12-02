@@ -226,8 +226,11 @@ const app = {
                 //if it is cast data loop through each cast member and build a name
                 data.cast.forEach(member => {
                     //build an img for each cast member and show the actors name and character
-                    app.buildActorImage(member, 200, castDiv);
-                    app.buildElement(`Cast #${member.cast_id} ${member.name} | Character in movie: ${member.character}`, 'p', castDiv);
+                    let actorDiv = document.createElement('div');
+                    actorDiv.classList.add("actor-credit");
+                    app.buildActorImage(member, 200, actorDiv);
+                    app.buildElement(`${member.name} | Character in movie: ${member.character}`, 'p', actorDiv);
+                    castDiv.appendChild(actorDiv);
 
                 });
                 console.log("cast data:", data.cast);
@@ -320,7 +323,14 @@ const app = {
         fetch(castUrl)
             .then(response => response.json())
             .then(credits => {
-                console.log(credits);
+                credits.cast.forEach(member => {
+                    //build an img for each cast member and show the actors name and character
+                    let actorDiv = document.createElement('div');
+                    actorDiv.classList.add("actor-credit");
+                    app.buildActorImage(member, 200, actorDiv);
+                    app.buildElement(`${member.name} | Character in movie: ${member.character}`, 'p', actorDiv);
+                    castDiv.appendChild(actorDiv);
+                });
             })
             .catch(err =>{
                 alert(`Sorry an error has occured while collecting credits data for ${tvData.name} | Error Details: ${err.message}`);
