@@ -55,11 +55,22 @@ html {
   top: 85vh;
   left: 78vw; }
 
+.results {
+  width: 300px;
+  display: flex;
+  flex-flow: row wrap; }
+
 .actor {
-  float: left; }
+  float: left;
+  width: 120;
+  margin: 10px;
+  background-color: #C5C6C7;
+  border-radius: 15px;
+  color: #1F2833;
+  text-align: center; }
   .actor img {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     border-radius: 15px; }
 
 .movie {

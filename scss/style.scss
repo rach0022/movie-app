@@ -75,16 +75,23 @@ html {
 }
 
 //styling on the search results page, mobile view
-#searchresults{
-    // display: flex;
-    // flex-flow: row wrap;
+.results{
+    width: 300px;
+    display: flex;
+    flex-flow: row wrap;
 }
 //styling on the actor profiles in the search results
 .actor{
     float: left;
+    width: 120;
+    margin: 10px;
+    background-color: $text-color;
+    border-radius: 15px;
+    color: $bg-accent-color;
+    text-align: center;
     img{
-        width: 100px;
-        height: 100px;
+        width: 130px;
+        height: 130px;
         border-radius: 15px;
     }
 }
