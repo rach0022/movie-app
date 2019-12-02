@@ -111,6 +111,12 @@ header{
         text-align: center;
         font-weight: 300;
         font-size: 40px;
+        margin-bottom: 0;
+        margin-top: 0;
+        
+    }
+    img{
+        padding-top: 20px;
     }
 }
 
@@ -170,6 +176,8 @@ header{
 
 //styling on the movie div in the actors page
 .movie{
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
     width: 200px;
     padding-bottom: 0;
@@ -180,7 +188,10 @@ header{
     display: flex;
     @include flex(column, center);
     color: $card-color;
-
+    p{
+        text-transform: uppercase;
+        font-size: 1.3em;
+    }
     width: inherit;
 
     img{
@@ -213,6 +224,8 @@ header{
     text-align: center;
     @include flex(column, center);
     justify-content: space-around;
+    text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
+    font-size: 1.05em;
     .actor-credit{
         width: 300px;
         height: 100px;
@@ -220,6 +233,7 @@ header{
     }
     img {
         border-radius: 50%;
+        border: 3px solid $bg-color;
         width: 100px;
         height: 100px;
         float: left;
@@ -235,13 +249,27 @@ header{
     }
 }
 
+.moviesby{
+    @include flex(column, center);
+    transform: scale(1);
+}
+
 //styling for the movie details entire screen
 #moviedetails{
     text-align: center;
     display: flex;
     align-items: center;
     flex-direction: column;
+    border-bottom: 4px solid $card-color;
+    font-weight: 600;
+    text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
+    font-size: 1.17em;
+    img{
+        text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
+    }
 }
+
+
 
 //incase we get a tvshow in the results we will 
 //make some styling indicators that you cannot click this

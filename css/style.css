@@ -88,7 +88,11 @@ header {
   color: #66FCF1;
   text-align: center;
   font-weight: 300;
-  font-size: 40px; }
+  font-size: 40px;
+  margin-bottom: 0;
+  margin-top: 0; }
+#actordetails img {
+  padding-top: 20px; }
 
 #backbutton {
   z-index: 200;
@@ -124,6 +128,8 @@ header {
     box-shadow: 2px 2px 4px #0B0C10, -2px -2px 4px #1F2833; }
 
 .movie {
+  margin-left: 10px;
+  margin-right: 10px;
   margin-top: 10px;
   width: 200px;
   padding-bottom: 0;
@@ -138,6 +144,9 @@ header {
   justify-content: center;
   color: #66FCF1;
   width: inherit; }
+  .movie p {
+    text-transform: uppercase;
+    font-size: 1.3em; }
   .movie img {
     margin-bottom: 0;
     position: relative;
@@ -159,13 +168,16 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  justify-content: space-around; }
+  justify-content: space-around;
+  text-shadow: 2px 2px #0B0C10, -2px -2px #0B0C10;
+  font-size: 1.05em; }
   #cast .actor-credit {
     width: 300px;
     height: 100px;
     padding-bottom: 20px; }
   #cast img {
     border-radius: 50%;
+    border: 3px solid #0B0C10;
     width: 100px;
     height: 100px;
     float: left; }
@@ -175,10 +187,23 @@ header {
     #cast #tv-creators .creator img {
       float: left; }
 
+.moviesby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1); }
+
 #moviedetails {
   text-align: center;
   display: flex;
   align-items: center;
-  flex-direction: column; }
+  flex-direction: column;
+  border-bottom: 4px solid #66FCF1;
+  font-weight: 600;
+  text-shadow: 2px 2px #0B0C10, -2px -2px #0B0C10;
+  font-size: 1.17em; }
+  #moviedetails img {
+    text-shadow: 2px 2px #0B0C10, -2px -2px #0B0C10; }
 
 /*# sourceMappingURL=style.css.map */
