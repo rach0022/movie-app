@@ -3,7 +3,7 @@ html {
 
 .page {
   box-sizing: border-box;
-  min-height: 100vh;
+  min-height: 75vh;
   width: 100vw;
   position: absolute;
   top: 150px;
@@ -19,6 +19,8 @@ html {
   .page.active {
     opacity: 1;
     z-index: 100; }
+  .page#searchpage {
+    justify-content: flex-start; }
   .page form {
     display: flex;
     flex-direction: column;
@@ -40,7 +42,13 @@ html {
       .page form button:hover {
         border: 2px solid #45A29E; }
   .page input[type=text] {
-    background-color: #C5C6C7; }
+    background-color: #C5C6C7;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.2em; }
 
 header {
   background-color: #0B0C10;
