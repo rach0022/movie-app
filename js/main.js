@@ -467,6 +467,9 @@ const app = {
         }
 
         //blur the event so android will stop showing the keyboard
+        // document.querySelector('.formbox').blur();
+    },
+    blurInput: () =>{
         document.querySelector('.formbox').blur();
     },
     backButton: ev => {
