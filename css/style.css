@@ -6,7 +6,7 @@ html {
   min-height: 100vh;
   width: 100vw;
   position: absolute;
-  top: 15vh;
+  top: 20vh;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -48,10 +48,12 @@ header {
   z-index: 250;
   opacity: 1;
   width: 100vw;
-  height: 15vh;
+  height: 20vh;
   text-align: center;
   top: 0;
   left: 0;
+  padding: 0;
+  margin: 0;
   position: fixed; }
 
 #backbutton {
