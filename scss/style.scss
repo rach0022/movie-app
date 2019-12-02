@@ -113,6 +113,7 @@ header{
 //styling on the movie div in the actors page
 .movie{
     margin-top: 10px;
+    width: 200px;
     padding-bottom: 0;
     margin-bottom: 0;
     text-align: center;
@@ -132,6 +133,14 @@ header{
         //this design is responsive
         width: 200;
         height: 300;
+    }
+    i{
+        width: 200px;
+        position: relative;
+        top: -10px;
+        background-color: $bg-color;
+
+        font-size: 50px;
     }
 }
 

@@ -89,6 +89,7 @@ header {
 
 .movie {
   margin-top: 10px;
+  width: 200px;
   padding-bottom: 0;
   margin-bottom: 0;
   text-align: center;
@@ -100,6 +101,12 @@ header {
     top: 6px;
     width: 200;
     height: 300; }
+  .movie i {
+    width: 200px;
+    position: relative;
+    top: -10px;
+    background-color: #0B0C10;
+    font-size: 50px; }
 
 #cast {
   text-align: center;
