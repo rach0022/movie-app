@@ -110,10 +110,18 @@ html {
 //styling for the cast on the movie detail screen
 #cast{
     text-align: center;
+    @include flex(column, center);
+    justify-content: space-around;
+    .actor-credit{
+        width: 300px;
+        height: 100px;
+        padding-bottom: 20px;
+    }
     img {
         border-radius: 50%;
         width: 100px;
         height: 100px;
+        float: left;
     }
 }
 
