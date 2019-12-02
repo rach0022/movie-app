@@ -179,13 +179,19 @@ const app = {
             movieDiv.classList.add('movie');
             //create the element holding the movie results
             let testMovies = document.createElement('p');
+            let icon = document.createElement('i');
+            icon.classList.add("fas");
             console.log(movie);
             switch(movie.media_type){
                 case "tv":
+                    // <i class="fas fa-tv"></i>
+                    icon.classList.add("fa-tv")
                     testMovies.textContent = movie.name;
                     movieDiv.classList.add("tv");
                     break;
                 case "movie":
+                    // <i class="fas fa-film"></i>
+                    icon.classList.add("fa-film");
                     testMovies.textContent = movie.title;
                     break;
             }
@@ -195,6 +201,7 @@ const app = {
             movieDiv.addEventListener('click', app.buildMoviePage);
             movieDiv.appendChild(testMovies);
             app.buildMovieImage(movie, 200, movieDiv);
+            movieDiv.appendChild(icon);
             output.appendChild(movieDiv);
             targetDiv.appendChild(output);
         })
