@@ -3,3 +3,7 @@ $bg-accent-color: #1F2833;
 $text-color: #C5C6C7;
 $card-color: #66FCF1;
 $card-accent-color: #45A29E;
+
+//media queries as variables:
+$tablet_query: "screen and (min-width: 700px) and (max-width: 1200px)";
+$desktop_query: "screen and (min-width: 1201px)";

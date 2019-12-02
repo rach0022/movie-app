@@ -3,6 +3,7 @@
 
 html {
     background-color: $bg-accent-color;
+    font-size: 16px;
 }
 
 //header of page in mobile view:
@@ -11,7 +12,7 @@ header{
     color: $card-color;
     z-index: 250;
     opacity: 1;
-    width: 100vw;
+    width: 100%;
     height: 150px;
     text-align: center;
     top: 0;
@@ -64,18 +65,34 @@ header{
                 border: 2px solid $card-accent-color;
             }
         }
+        input[type=text]{
+            // border: 2px solid $card-color;
+            background-color: $text-color;
+            width: 150px;
+            height: 50px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.2em;
+        }
+        @media #{$tablet_query}{
+            width: 80vw;
+            height: 20vh;
+            align-items: center;
+            input[type=text]{
+                width: 100%;
+            }
+            button{
+                width: 100%;
+                position: relative;
+                left: -10px;
+            }
+        }
     }
-    input[type=text]{
-        // border: 2px solid $card-color;
-        background-color: $text-color;
-        width: 150px;
-        height: 50px;
-        border-radius: 20px;
-        text-align: center;
-        font-weight: 900;
-        font-size: 1.2em;
-    }
+    
 }
+
+
 
 #searchresults{
     h3{
@@ -97,6 +114,15 @@ header{
         width: 300px;
         display: flex;
         flex-flow: row wrap;
+        justify-content: center;
+    }
+    @media #{$tablet_query}{
+        font-size: 1.2rem;
+
+        .results{
+            width: 100%;
+
+        }
     }
 }
 
@@ -117,6 +143,71 @@ header{
     }
     img{
         padding-top: 20px;
+    }
+    .moviesby{
+        @include flex(column, center);
+        transform: scale(1);
+    }
+    //styling on the movie div in the actors page
+    .movie{
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        width: 200px;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        text-align: center;
+        border-right: 0;
+        border-left: 0;
+        display: flex;
+        @include flex(column, center);
+        color: $card-color;
+        p{
+            text-transform: uppercase;
+            font-size: 1.3em;
+            margin-bottom: 0;
+        }
+        width: inherit;
+
+        img{
+            //pushing the image to the bottom of the div
+            //will find out later why there is the tiniest amout of space at the
+            //bottoom that is open
+            margin-bottom: 0;
+            position: relative;
+            top: 6px;
+
+            //set a default width and height for the image, change once
+            //this design is responsive
+            width: 200;
+            height: 300;
+            float: left;
+            
+        }
+        i{
+            color: $card-color;
+            width: 200px;
+            position: relative;
+            top: -10px;
+            background-color: $bg-color;
+
+            font-size: 50px;
+        }
+    }
+    @media #{$tablet_query}{
+        .moviesby{
+            flex-direction: row;
+        }
+        .movie{
+            width: 30%;
+            img{
+                transform: scale(0.8);
+            }
+            i{
+                transform: scale(0.8);
+                top: -40px;
+            }
+        }
     }
 }
 
@@ -142,9 +233,80 @@ header{
     position: fixed;
     top: 85vh;
     left: 78vw;
+    @media #{$tablet_query}{
+        transform: scale(0.8);
+        left: 90vw;
+    }
 
 }
-
+#movieresults{
+    //styling for the movie details entire screen
+    #moviedetails{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-bottom: 4px solid $card-color;
+        font-weight: 600;
+        text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
+        font-size: 1.17em;
+        img{
+            text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
+        }
+    }
+    //styling for the cast on the movie detail screen
+    #cast{
+        text-align: center;
+        @include flex(column, center);
+        justify-content: space-around;
+        text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
+        font-size: 1.05em;
+        .actor-credit{
+            width: 300px;
+            height: 100px;
+            padding-bottom: 20px;
+        }
+        img {
+            border-radius: 50%;
+            border: 3px solid $bg-color;
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+        #tv-creators{
+            display: flex;
+            flex-direction: row;
+            .creator{
+                img{
+                    float: none;
+                }
+            }
+        }
+    }
+    @media #{$tablet_query} {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        font-size: 1.2rem;
+        border: 0;
+        width: 100%;
+        #moviedetails{
+            width: 50vw;
+            border-bottom: 0;
+            position: fixed;
+            top: 150px;
+            left: 0;
+            font-size: 0.8em;
+        }
+        #cast{
+            width:  fit-content;
+            position: relative;
+            left: 20vw;
+        }
+    }
+}
 
 //styling on the actor profiles in the search results
 .actor{
@@ -173,103 +335,6 @@ header{
         box-shadow: 2px 2px 4px $bg-color,-2px -2px 4px $bg-accent-color;
     }
 }
-
-//styling on the movie div in the actors page
-.movie{
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    width: 200px;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    text-align: center;
-    border-right: 0;
-    border-left: 0;
-    display: flex;
-    @include flex(column, center);
-    color: $card-color;
-    p{
-        text-transform: uppercase;
-        font-size: 1.3em;
-    }
-    width: inherit;
-
-    img{
-        //pushing the image to the bottom of the div
-        //will find out later why there is the tiniest amout of space at the
-        //bottoom that is open
-        margin-bottom: 0;
-        position: relative;
-        top: 6px;
-
-        //set a default width and height for the image, change once
-        //this design is responsive
-        width: 200;
-        height: 300;
-        float: left;
-    }
-    i{
-        color: $card-color;
-        width: 200px;
-        position: relative;
-        top: -10px;
-        background-color: $bg-color;
-
-        font-size: 50px;
-    }
-}
-
-//styling for the cast on the movie detail screen
-#cast{
-    text-align: center;
-    @include flex(column, center);
-    justify-content: space-around;
-    text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
-    font-size: 1.05em;
-    .actor-credit{
-        width: 300px;
-        height: 100px;
-        padding-bottom: 20px;
-    }
-    img {
-        border-radius: 50%;
-        border: 3px solid $bg-color;
-        width: 100px;
-        height: 100px;
-        float: left;
-    }
-    #tv-creators{
-        display: flex;
-        flex-direction: row;
-        .creator{
-            img{
-                float: left;
-            }
-        }
-    }
-}
-
-.moviesby{
-    @include flex(column, center);
-    transform: scale(1);
-}
-
-//styling for the movie details entire screen
-#moviedetails{
-    text-align: center;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-bottom: 4px solid $card-color;
-    font-weight: 600;
-    text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
-    font-size: 1.17em;
-    img{
-        text-shadow: 2px 2px $bg-color,-2px -2px $bg-color;
-    }
-}
-
-
 
 //incase we get a tvshow in the results we will 
 //make some styling indicators that you cannot click this
