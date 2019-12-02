@@ -6,7 +6,7 @@ html {
   min-height: 100vh;
   width: 100vw;
   position: absolute;
-  top: 0;
+  top: 15vh;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -41,6 +41,18 @@ html {
         border: 2px solid #45A29E; }
   .page input[type=text] {
     background-color: #C5C6C7; }
+
+header {
+  background-color: #0B0C10;
+  color: #66FCF1;
+  z-index: 250;
+  opacity: 1;
+  width: 100vw;
+  height: 15vh;
+  text-align: center;
+  top: 0;
+  left: 0;
+  position: fixed; }
 
 #backbutton {
   z-index: 200;
