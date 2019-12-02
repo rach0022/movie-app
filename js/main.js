@@ -152,7 +152,10 @@ const app = {
         //first stop the form from submitting accidentally
         ev.preventDefault();
         ev.stopPropagation();
-        console.log(app.actorData[ev.currentTarget.getAttribute("data-actornum")]);
+
+        //create a variable to store the actor num from our internal variable
+        let data_actornum = ev.currentTarget.getAttribute("data-actornum");
+        console.log(app.actorData[data_actornum]);
 
         //first get a reference to the proper output div and remove all children within it
         let targetDiv= document.getElementById('actordetails');
@@ -166,14 +169,15 @@ const app = {
         app.buildTitle(ev.currentTarget.getAttribute("data-actorname"), output);
 
         //build the poster image for the actor:
-        console.log(ev.currentTarget.getAttribute("data-actornum"));
-        app.buildActorImage(app.actorData[ev.currentTarget.getAttribute("data-actornum")], 300, output);
+        console.log(data_actornum);
+        app.buildActorImage(app.actorData[data_actornum], 300, output);
+
 
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
         app.buildTitle("Most Popular Movies:", output);
-        app.actorData[ev.currentTarget.getAttribute("data-actornum")].known_for.forEach(movie => {
+        app.actorData[data_actornum].known_for.forEach(movie => {
             //now create a movie div to add the movies too
             let movieDiv = document.createElement('div');
             movieDiv.classList.add('movie');
