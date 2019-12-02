@@ -172,6 +172,24 @@ const app = {
         console.log(data_actornum);
         app.buildActorImage(app.actorData[data_actornum], 300, output);
 
+        //using the num.toFixed(1) method to put the popularity to 1 decimal spot
+        app.buildElement(`Popularity: ${app.actorData[data_actornum].popularity.toFixed(1)}/10`,'p',output);
+
+        //ifstatement to check if male or female and then append to output with app.build element
+        if(app.actorData[data_actornum]==1){
+
+        }
+        switch(app.actorData[data_actornum].gender){
+            case 1:
+                app.buildElement("Female",'p',output);
+                break;
+            case 2:
+                app.buildElement("Male",'p',output);
+                break;
+            default:
+                break;
+        }
+
 
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
