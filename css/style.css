@@ -89,6 +89,11 @@ html {
     width: 100px;
     height: 100px;
     float: left; }
+  #cast #tv-creators {
+    display: flex;
+    flex-direction: row; }
+    #cast #tv-creators .creator img {
+      float: left; }
 
 #moviedetails {
   text-align: center;

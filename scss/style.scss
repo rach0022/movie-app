@@ -123,6 +123,15 @@ html {
         height: 100px;
         float: left;
     }
+    #tv-creators{
+        display: flex;
+        flex-direction: row;
+        .creator{
+            img{
+                float: left;
+            }
+        }
+    }
 }
 
 //styling for the movie details entire screen
