@@ -5,6 +5,23 @@ html {
     background-color: $bg-accent-color;
 }
 
+//header of page in mobile view:
+header{
+    background-color: $bg-color;
+    color: $card-color;
+    z-index: 250;
+    opacity: 1;
+    width: 100vw;
+    height: 150px;
+    text-align: center;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    font-weight: 900;
+}
+
 // taken from simple spa demo, page and active class idea
 //mobile first display, then make media queries for larger screens
 .page {
@@ -59,25 +76,34 @@ html {
         font-size: 1.2em;
     }
 }
-header{
-    background-color: $bg-color;
-    color: $card-color;
-    z-index: 250;
-    opacity: 1;
-    width: 100vw;
-    height: 150px;
-    text-align: center;
-    top: 0;
-    left: 0;
-    padding: 0;
-    margin: 0;
-    position: fixed;
+
+#searchresults{
+    h3{
+        color: $card-color;
+        font-size: 1.4em;
+
+        //make it so atlest the first letter of search query is caps
+        text-transform: capitalize;
+        width: 100%;
+        text-align: center;
+        border-bottom: 3px solid $card-color;
+        padding-bottom: 10px;
+        &:last-child{
+            height: 20px;
+        }
+    }
+    //styling on the search results page, mobile view
+    .results{
+        width: 300px;
+        display: flex;
+        flex-flow: row wrap;
+    }
 }
 
 #actordetails{
     h3{
         width: 100%;
-        border: 4px solid $card-color;
+        border: 6px solid $card-color;
         //make sure border does not extend past view to prevent horizontal scroll issue
         border-left: 0;
         border-right: 0;
@@ -113,25 +139,32 @@ header{
 
 }
 
-//styling on the search results page, mobile view
-.results{
-    width: 300px;
-    display: flex;
-    flex-flow: row wrap;
-}
+
 //styling on the actor profiles in the search results
 .actor{
     float: left;
     width: 130px;
     margin: 10px;
-    background-color: $text-color;
+    background-color: $bg-color;
     border-radius: 15px;
-    color: $bg-accent-color;
     text-align: center;
+    font-weight: bold;
+    color: $card-color;
+    transition: all 200ms ease-in;
+
+    //use a box shado to make it pop out a bit more
+    box-shadow: 2px 2px 4px $card-color,-2px -2px 4px $card-accent-color;
     img{
         width: 130px;
         height: 130px;
         border-radius: 15px;
+    }
+
+    //proerpties for when user hovers over div
+    &:hover{
+        transform: scale(1.4);
+        z-index: 300;
+        box-shadow: 2px 2px 4px $bg-color,-2px -2px 4px $bg-accent-color;
     }
 }
 
@@ -142,11 +175,11 @@ header{
     padding-bottom: 0;
     margin-bottom: 0;
     text-align: center;
-    border: 2px solid $text-color;
     border-right: 0;
     border-left: 0;
     display: flex;
     @include flex(column, center);
+    color: $card-color;
 
     width: inherit;
 
@@ -162,6 +195,7 @@ header{
         //this design is responsive
         width: 200;
         height: 300;
+        float: left;
     }
     i{
         color: $card-color;

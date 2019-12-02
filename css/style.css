@@ -1,6 +1,21 @@
 html {
   background-color: #1F2833; }
 
+header {
+  background-color: #0B0C10;
+  color: #66FCF1;
+  z-index: 250;
+  opacity: 1;
+  width: 100vw;
+  height: 150px;
+  text-align: center;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  font-weight: 900; }
+
 .page {
   box-sizing: border-box;
   min-height: 75vh;
@@ -50,23 +65,24 @@ html {
     font-weight: 900;
     font-size: 1.2em; }
 
-header {
-  background-color: #0B0C10;
+#searchresults h3 {
   color: #66FCF1;
-  z-index: 250;
-  opacity: 1;
-  width: 100vw;
-  height: 150px;
+  font-size: 1.4em;
+  text-transform: capitalize;
+  width: 100%;
   text-align: center;
-  top: 0;
-  left: 0;
-  padding: 0;
-  margin: 0;
-  position: fixed; }
+  border-bottom: 3px solid #66FCF1;
+  padding-bottom: 10px; }
+  #searchresults h3:last-child {
+    height: 20px; }
+#searchresults .results {
+  width: 300px;
+  display: flex;
+  flex-flow: row wrap; }
 
 #actordetails h3 {
   width: 100%;
-  border: 4px solid #66FCF1;
+  border: 6px solid #66FCF1;
   border-left: 0;
   border-right: 0;
   color: #66FCF1;
@@ -87,23 +103,25 @@ header {
   top: 85vh;
   left: 78vw; }
 
-.results {
-  width: 300px;
-  display: flex;
-  flex-flow: row wrap; }
-
 .actor {
   float: left;
   width: 130px;
   margin: 10px;
-  background-color: #C5C6C7;
+  background-color: #0B0C10;
   border-radius: 15px;
-  color: #1F2833;
-  text-align: center; }
+  text-align: center;
+  font-weight: bold;
+  color: #66FCF1;
+  transition: all 200ms ease-in;
+  box-shadow: 2px 2px 4px #66FCF1, -2px -2px 4px #45A29E; }
   .actor img {
     width: 130px;
     height: 130px;
     border-radius: 15px; }
+  .actor:hover {
+    transform: scale(1.4);
+    z-index: 300;
+    box-shadow: 2px 2px 4px #0B0C10, -2px -2px 4px #1F2833; }
 
 .movie {
   margin-top: 10px;
@@ -111,7 +129,6 @@ header {
   padding-bottom: 0;
   margin-bottom: 0;
   text-align: center;
-  border: 2px solid #C5C6C7;
   border-right: 0;
   border-left: 0;
   display: flex;
@@ -119,13 +136,15 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #66FCF1;
   width: inherit; }
   .movie img {
     margin-bottom: 0;
     position: relative;
     top: 6px;
     width: 200;
-    height: 300; }
+    height: 300;
+    float: left; }
   .movie i {
     color: #66FCF1;
     width: 200px;
