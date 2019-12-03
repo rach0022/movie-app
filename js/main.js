@@ -155,7 +155,7 @@ const app = {
 
         //create a variable to store the actor num from our internal variable
         let data_actornum = ev.currentTarget.getAttribute("data-actornum");
-        console.log(app.actorData[data_actornum]);
+        // console.log(app.actorData[data_actornum]);
 
         //first get a reference to the proper output div and remove all children within it
         let targetDiv= document.getElementById('actordetails');
@@ -169,7 +169,7 @@ const app = {
         app.buildTitle(ev.currentTarget.getAttribute("data-actorname"), output);
 
         //build the poster image for the actor:
-        console.log(data_actornum);
+        // console.log(data_actornum);
         app.buildActorImage(app.actorData[data_actornum], 300, output);
 
         //using the num.toFixed(1) method to put the popularity to 1 decimal spot
@@ -208,7 +208,7 @@ const app = {
             let testMovies = document.createElement('p');
             let icon = document.createElement('i');
             icon.classList.add("fas");
-            console.log(movie);
+            // console.log(movie);
             switch(movie.media_type){
                 case "tv":
                     // <i class="fas fa-tv"></i>
@@ -244,7 +244,7 @@ const app = {
         moviePromise.then(data => {
 
             //first check if it is movie data or cast data:
-            console.log(data);
+            // console.log(data);
             //cehck if it is cast data or movie data
             //also check if the data.cast is null and remove all elements
             //incase the cast data is remaining for another movie
@@ -268,7 +268,7 @@ const app = {
                     castDiv.appendChild(actorDiv);
 
                 });
-                console.log("cast data:", data.cast);
+                // console.log("cast data:", data.cast);
                 targetDiv.appendChild(castDiv);
             } else {
                 //first set the proper output  of movie details and clear whatever is there
@@ -278,7 +278,7 @@ const app = {
                 let movieDiv = document.createDocumentFragment();
 
                 //this is where we build the movie data for the page 4
-                console.log("movie data", data);
+                // console.log("movie data", data);
 
                 //create the title for the page
                 app.buildTitle(`Title: ${data.title}`, movieDiv);
@@ -306,20 +306,20 @@ const app = {
             }
     })
         .catch(err =>{
-            console.log("error occured:",err.message);
+            // console.log("error occured:",err.message);
             alert(`Sorry an error has occured while collecting the movie data | Error Details: ${err.message}`);
 
         })
         //change the active page style and set the active page in the app
         app.changePage(moviePage);
-        console.log(moviePromise);
+        // console.log(moviePromise);
     },
 
     //function to build a tv show page
     //because tv shows have different properties than movies
     //need to make specific page to deal with tvData
     buildTvPage: tvData=>{
-        console.log(tvData);
+        // console.log(tvData);
         //reference to output div for this page
         let output = document.createDocumentFragment();
         let targetDiv = document.getElementById('movieresults');
@@ -404,7 +404,7 @@ const app = {
                 .then(response => response.json())
                 .then(app.buildTvPage)
                 .catch(err =>{
-                    console.log(err.message);
+                    // console.log(err.message);
                     alert(`Sorry an error has occured while collecting the tv show data | Error Details: ${err.message}`);
                 })
         } else {
@@ -426,7 +426,7 @@ const app = {
                     })
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    // console.log(err.message);
                     alert(`Sorry an error has occured while collecting the movie data | Error Details: ${err.message}`);
                 })
         }
@@ -448,7 +448,7 @@ const app = {
         app.active = targetDiv;
 
         app.searchQuery = document.getElementById('actor').value;
-        console.log("You searched:",app.searchQuery);
+        // console.log("You searched:",app.searchQuery);
 
         app.buildTitle("You Searched: " + app.searchQuery, targetDiv);
 
@@ -489,7 +489,7 @@ const app = {
                     targetDiv.appendChild(output);
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    // console.log(err.message);
                     alert(`Sorry an error has occured while collecting the actor data | Error Details: ${err.message}`);
                 });
         }
