@@ -43,7 +43,11 @@ const app = {
 
         //add the event lsiteners for the history api change
         window.addEventListener('popstate', app.backButton);
+        window.addEventListener('hashchange', hashc_function);
 
+    },
+    hashc_function: ev => {
+        console.log(ev, history, location);
     },
 
     //remove all child elements from a parent element
