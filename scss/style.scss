@@ -409,4 +409,31 @@ header{
             left: 20vw;
         }
     }
+    @media #{$desktop_query} {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        font-size: 1.2rem;
+        border: 0;
+        width: 100%;
+        h3{
+            font-size: 1.2rem;
+        }
+        #moviedetails{
+            width: 50vw;
+            border-bottom: 0;
+            position: fixed;
+            top: 150px;
+            left: 0;
+            font-size: 0.8em;
+        }
+        #cast{
+            width:  fit-content;
+            position: relative;
+            left: 20vw;
+            font-size: 0.9rem;
+        }
+    }
 }
