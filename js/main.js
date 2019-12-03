@@ -194,7 +194,7 @@ const app = {
         //now to display the movie results for the first actor returned (for testing)
         //go through each moevie in the actors corresponding knownfor arrray
         //use the data-actornum from the ev.target
-        app.buildTitle("Most Popular Movies:", output);
+        app.buildTitle("Most Popular Works:", output);
 
         //create a known-for div to hold all actors media known for
 
