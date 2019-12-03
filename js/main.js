@@ -6,6 +6,7 @@ const app = {
     imageBaseURL: "https://image.tmdb.org/t/p/",
     pages: [],
     active: null,
+    currentState: null,
 
     //the api key for my account on TMDB
     apiKey: '89c8c4c56a53dd80baf99fc3b4c4a86c',
@@ -43,11 +44,14 @@ const app = {
 
         //add the event lsiteners for the history api change
         window.addEventListener('popstate', app.backButton);
-        window.addEventListener('hashchange', hashc_function);
+        window.addEventListener('hashchange', app.hashc_function);
 
     },
     hashc_function: ev => {
-        console.log(ev, history, location);
+        console.log(window.event.state,location.href.split('#')[1]);
+        if(location.href.split('#')[1] == 'searchpage'){
+            app.buildSearchPage(history.state);
+        }
     },
 
     //remove all child elements from a parent element
@@ -125,7 +129,7 @@ const app = {
     changePage: newPage=>{
 
         //push the new state of the page to the hsitory api
-        history.pushState({}, newPage.id, `${app.baseURL}#${newPage.id}`);
+        history.pushState(app.searchQuery, newPage.id, `${app.baseURL}#${newPage.id}`);
         //swtich the active class onthe active page 
         app.active.classList.toggle('active');
 
@@ -509,6 +513,7 @@ const app = {
         //stop any default acations from the button occuring:
         ev.preventDefault();
         ev.stopPropagation();
+        console.log(ev.state);
 
         //update the pages for app.pages:
         app.updatePages();
