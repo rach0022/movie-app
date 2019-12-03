@@ -16,6 +16,14 @@ header {
   margin: 0;
   position: fixed;
   font-weight: 900; }
+  @media screen and (min-width: 700px) and (max-width: 1200px) {
+    header {
+      font-size: 1.2rem; } }
+  @media screen and (min-width: 1201px) {
+    header {
+      background-color: #C5C6C7;
+      color: #0B0C10;
+      font-size: 1.4rem; } }
 
 .page {
   box-sizing: border-box;
@@ -76,6 +84,21 @@ header {
           width: 100%;
           position: relative;
           left: -10px; } }
+    @media screen and (min-width: 1201px) {
+      .page form {
+        width: 80vw;
+        height: 10vh;
+        align-items: center;
+        background-color: #C5C6C7;
+        border-radius: 0; }
+        .page form input[type=text] {
+          width: 100%;
+          background-color: #0B0C10;
+          color: #66FCF1; }
+        .page form button {
+          width: 100%;
+          position: relative;
+          left: -10px; } }
 
 #searchresults h3 {
   color: #66FCF1;
@@ -92,11 +115,47 @@ header {
   display: flex;
   flex-flow: row wrap;
   justify-content: center; }
+#searchresults .actor {
+  float: left;
+  width: 130px;
+  margin: 10px;
+  background-color: #0B0C10;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #66FCF1;
+  transition: all 200ms ease-in;
+  box-shadow: 2px 2px 4px #66FCF1, -2px -2px 4px #45A29E; }
+  #searchresults .actor img {
+    width: 130px;
+    height: 130px;
+    border-radius: 15px; }
+  #searchresults .actor:hover {
+    transform: scale(1.4);
+    z-index: 300;
+    box-shadow: 2px 2px 4px #0B0C10, -2px -2px 4px #1F2833; }
+  @media screen and (min-width: 1201px) {
+    #searchresults .actor {
+      display: flex;
+      width: 20vw;
+      height: 180px;
+      justify-content: space-between;
+      text-shadow: 1px 1px 2px #C5C6C7; }
+      #searchresults .actor img {
+        width: 120px;
+        height: 180px;
+        border: 1px solid #C5C6C7; } }
 @media screen and (min-width: 700px) and (max-width: 1200px) {
   #searchresults {
     font-size: 1.2rem; }
     #searchresults .results {
       width: 100%; } }
+@media screen and (min-width: 1201px) {
+  #searchresults {
+    font-size: 1.4rem; }
+    #searchresults .results {
+      width: 70%;
+      justify-content: space-between; } }
 
 #actordetails h3 {
   width: 100%;
@@ -128,6 +187,7 @@ header {
   border-right: 0;
   border-left: 0;
   display: flex;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,6 +222,21 @@ header {
     #actordetails .movie i {
       transform: scale(0.8);
       top: -40px; } }
+@media screen and (min-width: 1201px) {
+  #actordetails .moviesby {
+    flex-direction: row;
+    justify-content: space-around; }
+  #actordetails .movie {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 250px; }
+    #actordetails .movie img {
+      transform: scale(1.2); }
+    #actordetails .movie i {
+      transform: scale(1.2);
+      top: -10px; }
+    #actordetails .movie p {
+      padding-bottom: 10px; } }
 
 #backbutton {
   z-index: 200;
@@ -179,6 +254,12 @@ header {
     #backbutton {
       transform: scale(0.8);
       left: 90vw; } }
+  @media screen and (min-width: 1201px) {
+    #backbutton {
+      top: 50px;
+      transform: scale(0.8);
+      left: 90vw;
+      z-index: 300; } }
 
 #movieresults #moviedetails {
   text-align: center;
@@ -236,25 +317,5 @@ header {
       width: fit-content;
       position: relative;
       left: 20vw; } }
-
-.actor {
-  float: left;
-  width: 130px;
-  margin: 10px;
-  background-color: #0B0C10;
-  border-radius: 15px;
-  text-align: center;
-  font-weight: bold;
-  color: #66FCF1;
-  transition: all 200ms ease-in;
-  box-shadow: 2px 2px 4px #66FCF1, -2px -2px 4px #45A29E; }
-  .actor img {
-    width: 130px;
-    height: 130px;
-    border-radius: 15px; }
-  .actor:hover {
-    transform: scale(1.4);
-    z-index: 300;
-    box-shadow: 2px 2px 4px #0B0C10, -2px -2px 4px #1F2833; }
 
 /*# sourceMappingURL=style.css.map */

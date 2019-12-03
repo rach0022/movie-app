@@ -21,6 +21,18 @@ header{
     margin: 0;
     position: fixed;
     font-weight: 900;
+
+
+    //meida query for tablet
+    @media #{$tablet_query}{
+        font-size: 1.2rem;
+    }
+    //media query for desktop view:
+    @media #{$desktop_query}{
+        background-color: $text-color;
+        color: $bg-color;
+        font-size: 1.4rem;
+    }
 }
 
 // taken from simple spa demo, page and active class idea
@@ -88,11 +100,26 @@ header{
                 left: -10px;
             }
         }
+        @media #{$desktop_query}{
+            width: 80vw;
+            height: 10vh;
+            align-items: center;
+            background-color: $text-color;
+            border-radius: 0;
+            input[type=text]{
+                width: 100%;
+                background-color: $bg-color;
+                color: $card-color;
+            }
+            button{
+                width: 100%;
+                position: relative;
+                left: -10px;
+            }
+        }
     }
     
 }
-
-
 
 #searchresults{
     h3{
@@ -116,12 +143,59 @@ header{
         flex-flow: row wrap;
         justify-content: center;
     }
+    //styling on the actor profiles in the search results
+    .actor{
+        float: left;
+        width: 130px;
+        margin: 10px;
+        background-color: $bg-color;
+        border-radius: 15px;
+        text-align: center;
+        font-weight: bold;
+        color: $card-color;
+        transition: all 200ms ease-in;
+
+        //use a box shado to make it pop out a bit more
+        box-shadow: 2px 2px 4px $card-color,-2px -2px 4px $card-accent-color;
+        img{
+            width: 130px;
+            height: 130px;
+            border-radius: 15px;
+        }
+
+        //proerpties for when user hovers over div
+        &:hover{
+            transform: scale(1.4);
+            z-index: 300;
+            box-shadow: 2px 2px 4px $bg-color,-2px -2px 4px $bg-accent-color;
+        }
+        @media #{$desktop_query}{
+            display: flex;
+            width: 20vw;
+            height: 180px;
+            justify-content: space-between;
+            text-shadow: 1px 1px 2px $text-color;
+            img{
+                width: 120px;
+                height: 180px;
+                border: 1px solid $text-color;
+            }
+        }
+    }
     @media #{$tablet_query}{
         font-size: 1.2rem;
 
         .results{
             width: 100%;
 
+        }
+    }
+    @media #{$desktop_query}{
+        font-size: 1.4rem;
+        
+        .results{
+            width: 70%;
+            justify-content: space-between;
         }
     }
 }
@@ -160,12 +234,14 @@ header{
         border-right: 0;
         border-left: 0;
         display: flex;
+        font-weight: 600;
         @include flex(column, center);
         color: $card-color;
         p{
             text-transform: uppercase;
             font-size: 1.3em;
             margin-bottom: 0;
+            
         }
         width: inherit;
 
@@ -209,6 +285,27 @@ header{
             }
         }
     }
+    @media #{$desktop_query}{
+        .moviesby{
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .movie{
+            padding-left: 30px;
+            padding-right: 30px;
+            width: 250px;
+            img{
+                transform: scale(1.2);
+            }
+            i{
+                transform: scale(1.2);
+                top: -10px;
+            }
+            p{
+                padding-bottom: 10px;
+            }
+        }
+    }
 }
 
 #backbutton{
@@ -236,6 +333,12 @@ header{
     @media #{$tablet_query}{
         transform: scale(0.8);
         left: 90vw;
+    }
+    @media #{$desktop_query}{
+        top: 50px;
+        transform: scale(0.8);
+        left: 90vw;
+        z-index: 300;
     }
 
 }
@@ -307,40 +410,3 @@ header{
         }
     }
 }
-
-//styling on the actor profiles in the search results
-.actor{
-    float: left;
-    width: 130px;
-    margin: 10px;
-    background-color: $bg-color;
-    border-radius: 15px;
-    text-align: center;
-    font-weight: bold;
-    color: $card-color;
-    transition: all 200ms ease-in;
-
-    //use a box shado to make it pop out a bit more
-    box-shadow: 2px 2px 4px $card-color,-2px -2px 4px $card-accent-color;
-    img{
-        width: 130px;
-        height: 130px;
-        border-radius: 15px;
-    }
-
-    //proerpties for when user hovers over div
-    &:hover{
-        transform: scale(1.4);
-        z-index: 300;
-        box-shadow: 2px 2px 4px $bg-color,-2px -2px 4px $bg-accent-color;
-    }
-}
-
-//incase we get a tvshow in the results we will 
-//make some styling indicators that you cannot click this
-//as it is a tvshow
-// .tv{
-//     opacity: 0.5;
-//     background-color: #FF0000;
-// }
-
