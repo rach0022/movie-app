@@ -41,6 +41,7 @@ const app = {
             history.replaceState({},app.active.id, `${app.baseURL}#${app.active.id}`);
         }
 
+        //add the event lsiteners for the history api change
         window.addEventListener('popstate', app.backButton);
 
     },
@@ -457,45 +458,46 @@ const app = {
         document.querySelector('form').reset();
 
         //if there is a search query
-        if(app.searchQuery){
-
-            //how to get a /search/person
-            let url = `https://api.themoviedb.org/3/search/person?api_key=${app.apiKey}&query=${app.searchQuery}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    let actor_results = document.createElement('div');
-                    actor_results.classList.add("results");
-                    //how to display all the actors with a name match
-                    data.results.forEach(actor => {
-                        let actorDiv = document.createElement('div');
-                        actorDiv.classList.add('actor');
-
-                        app.buildActorImage(actor, 200, actorDiv);
-                        let d = document.createElement('p');
-                        d.textContent = actor.name;
-
-                        //push the movies known for each actor onto the actor movie data arry
-                        //and then set a data-actor to the index location of the corresponding known for
-                        //data in the app.actorData array to call it later in build movies.
-                        app.actorData.push(actor);
-                        actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
-                        actorDiv.setAttribute("data-actorname", actor.name);
-                        actorDiv.addEventListener('click', app.buildActorPage);
-                        actorDiv.appendChild(d);
-                        actor_results.appendChild(actorDiv);
-                    })
-                    output.appendChild(actor_results);
-                    targetDiv.appendChild(output);
-                })
-                .catch(err => {
-                    // console.log(err.message);
-                    alert(`Sorry an error has occured while collecting the actor data | Error Details: ${err.message}`);
-                });
-        }
+        if(app.searchQuery) app.buildSearchPage(targetDiv,output);
 
         //blur the event so android will stop showing the keyboard
         // document.querySelector('.formbox').blur();
+    },
+    buildSearchPage: (targetDiv,output) =>{
+        //how to get a /search/person
+        let url = `https://api.themoviedb.org/3/search/person?api_key=${app.apiKey}&query=${app.searchQuery}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                let actor_results = document.createElement('div');
+                actor_results.classList.add("results");
+                //how to display all the actors with a name match
+                data.results.forEach(actor => {
+                    let actorDiv = document.createElement('div');
+                    actorDiv.classList.add('actor');
+
+                    app.buildActorImage(actor, 200, actorDiv);
+                    let d = document.createElement('p');
+                    d.textContent = actor.name;
+
+                    //push the movies known for each actor onto the actor movie data arry
+                    //and then set a data-actor to the index location of the corresponding known for
+                    //data in the app.actorData array to call it later in build movies.
+                    app.actorData.push(actor);
+                    actorDiv.setAttribute("data-actornum",app.actorData.length-1 );
+                    actorDiv.setAttribute("data-actorname", actor.name);
+                    actorDiv.addEventListener('click', app.buildActorPage);
+                    actorDiv.appendChild(d);
+                    actor_results.appendChild(actorDiv);
+                })
+                output.appendChild(actor_results);
+                targetDiv.appendChild(output);
+            })
+            .catch(err => {
+                // console.log(err.message);
+                alert(`Sorry an error has occured while collecting the actor data | Error Details: ${err.message}`);
+            });
+        
     },
     backButton: ev => {
         //stop any default acations from the button occuring:
