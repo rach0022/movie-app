@@ -441,7 +441,7 @@ const app = {
         //and then remove all the children from the div
         //and then switch the reference of the current page
         let targetDiv = document.getElementById('searchresults');
-        let output = document.createDocumentFragment();
+        
         app.changePage(targetDiv);
         app.removeElements(targetDiv);
 
@@ -458,14 +458,16 @@ const app = {
         document.querySelector('form').reset();
 
         //if there is a search query
-        if(app.searchQuery) app.buildSearchPage(targetDiv,output);
+        if(app.searchQuery) app.buildSearchPage(app.searchQuery);
 
         //blur the event so android will stop showing the keyboard
         // document.querySelector('.formbox').blur();
     },
-    buildSearchPage: (targetDiv,output) =>{
+    buildSearchPage: (query) =>{
         //how to get a /search/person
-        let url = `https://api.themoviedb.org/3/search/person?api_key=${app.apiKey}&query=${app.searchQuery}`;
+        let url = `https://api.themoviedb.org/3/search/person?api_key=${app.apiKey}&query=${query}`;
+        let targetDiv = document.getElementById('searchresults');
+        let output = document.createDocumentFragment();
         fetch(url)
             .then(response => response.json())
             .then(data => {
