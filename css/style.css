@@ -1,6 +1,7 @@
 html {
   background-color: #1F2833;
-  font-size: 16px; }
+  font-size: 16px;
+}
 
 header {
   background-color: #0B0C10;
@@ -15,15 +16,21 @@ header {
   padding: 0;
   margin: 0;
   position: fixed;
-  font-weight: 900; }
-  @media screen and (min-width: 700px) and (max-width: 1200px) {
-    header {
-      font-size: 1.2rem; } }
-  @media screen and (min-width: 1201px) {
-    header {
-      background-color: #C5C6C7;
-      color: #0B0C10;
-      font-size: 1.4rem; } }
+  font-weight: 900;
+  font-family: "Bree Serif", serif;
+}
+@media screen and (min-width: 700px) and (max-width: 1200px) {
+  header {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (min-width: 1201px) {
+  header {
+    background-color: #C5C6C7;
+    color: #0B0C10;
+    font-size: 1.4rem;
+  }
+}
 
 .page {
   box-sizing: border-box;
@@ -39,66 +46,82 @@ header {
   opacity: 0;
   z-index: 1;
   color: #C5C6C7;
-  background-color: #1F2833; }
-  .page.active {
-    opacity: 1;
-    z-index: 100; }
-  .page#searchpage {
-    justify-content: flex-start; }
+  font-family: "Roboto", sans-serif;
+  background-color: #1F2833;
+}
+.page.active {
+  opacity: 1;
+  z-index: 100;
+}
+.page#searchpage {
+  justify-content: flex-start;
+}
+.page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #66FCF1;
+  background-color: #0B0C10;
+  padding: 10vw;
+  border-radius: 10px;
+  margin: 20px;
+  font-size: 18px;
+}
+.page form button {
+  margin: 20px;
+  font-size: 1.2em;
+  color: #0B0C10;
+  background-color: #66FCF1;
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+.page form button:hover {
+  border: 2px solid #45A29E;
+}
+.page form input[type=text] {
+  background-color: #C5C6C7;
+  width: 150px;
+  height: 50px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.2em;
+}
+@media screen and (min-width: 700px) and (max-width: 1200px) {
   .page form {
-    display: flex;
-    flex-direction: column;
+    width: 80vw;
+    height: 20vh;
     align-items: center;
-    justify-content: center;
-    color: #66FCF1;
+  }
+  .page form input[type=text] {
+    width: 100%;
+  }
+  .page form button {
+    width: 100%;
+    position: relative;
+    left: -10px;
+  }
+}
+@media screen and (min-width: 1201px) {
+  .page form {
+    width: 80vw;
+    height: 10vh;
+    align-items: center;
+    background-color: #C5C6C7;
+    border-radius: 0;
+  }
+  .page form input[type=text] {
+    width: 100%;
     background-color: #0B0C10;
-    padding: 10vw;
-    border-radius: 10px;
-    margin: 20px;
-    font-size: 18px; }
-    .page form button {
-      margin: 20px;
-      font-size: 1.2em;
-      color: #0B0C10;
-      background-color: #66FCF1;
-      border-radius: 4px;
-      border: 2px solid transparent; }
-      .page form button:hover {
-        border: 2px solid #45A29E; }
-    .page form input[type=text] {
-      background-color: #C5C6C7;
-      width: 150px;
-      height: 50px;
-      border-radius: 20px;
-      text-align: center;
-      font-weight: 900;
-      font-size: 1.2em; }
-    @media screen and (min-width: 700px) and (max-width: 1200px) {
-      .page form {
-        width: 80vw;
-        height: 20vh;
-        align-items: center; }
-        .page form input[type=text] {
-          width: 100%; }
-        .page form button {
-          width: 100%;
-          position: relative;
-          left: -10px; } }
-    @media screen and (min-width: 1201px) {
-      .page form {
-        width: 80vw;
-        height: 10vh;
-        align-items: center;
-        background-color: #C5C6C7;
-        border-radius: 0; }
-        .page form input[type=text] {
-          width: 100%;
-          background-color: #0B0C10;
-          color: #66FCF1; }
-        .page form button {
-          width: 100%;
-          position: relative;
-          left: -10px; } }
+    color: #66FCF1;
+  }
+  .page form button {
+    width: 100%;
+    position: relative;
+    left: -10px;
+  }
+}
 
 #searchresults h3 {
   color: #66FCF1;
@@ -107,14 +130,17 @@ header {
   width: 100%;
   text-align: center;
   border-bottom: 3px solid #66FCF1;
-  padding-bottom: 10px; }
-  #searchresults h3:last-child {
-    height: 20px; }
+  padding-bottom: 10px;
+}
+#searchresults h3:last-child {
+  height: 20px;
+}
 #searchresults .results {
   width: 300px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center; }
+  justify-content: center;
+}
 #searchresults .actor {
   float: left;
   width: 130px;
@@ -125,37 +151,49 @@ header {
   font-weight: bold;
   color: #66FCF1;
   transition: all 200ms ease-in;
-  box-shadow: 2px 2px 4px #66FCF1, -2px -2px 4px #45A29E; }
+  box-shadow: 2px 2px 4px #66FCF1, -2px -2px 4px #45A29E;
+}
+#searchresults .actor img {
+  width: 130px;
+  height: 130px;
+  border-radius: 15px;
+}
+#searchresults .actor:hover {
+  transform: scale(1.4);
+  z-index: 300;
+  box-shadow: 2px 2px 4px #0B0C10, -2px -2px 4px #1F2833;
+}
+@media screen and (min-width: 1201px) {
+  #searchresults .actor {
+    display: flex;
+    width: 20vw;
+    height: 180px;
+    justify-content: space-between;
+    text-shadow: 1px 1px 2px #C5C6C7;
+  }
   #searchresults .actor img {
-    width: 130px;
-    height: 130px;
-    border-radius: 15px; }
-  #searchresults .actor:hover {
-    transform: scale(1.4);
-    z-index: 300;
-    box-shadow: 2px 2px 4px #0B0C10, -2px -2px 4px #1F2833; }
-  @media screen and (min-width: 1201px) {
-    #searchresults .actor {
-      display: flex;
-      width: 20vw;
-      height: 180px;
-      justify-content: space-between;
-      text-shadow: 1px 1px 2px #C5C6C7; }
-      #searchresults .actor img {
-        width: 120px;
-        height: 180px;
-        border: 1px solid #C5C6C7; } }
+    width: 120px;
+    height: 180px;
+    border: 1px solid #C5C6C7;
+  }
+}
 @media screen and (min-width: 700px) and (max-width: 1200px) {
   #searchresults {
-    font-size: 1.2rem; }
-    #searchresults .results {
-      width: 100%; } }
+    font-size: 1.2rem;
+  }
+  #searchresults .results {
+    width: 100%;
+  }
+}
 @media screen and (min-width: 1201px) {
   #searchresults {
-    font-size: 1.4rem; }
-    #searchresults .results {
-      width: 70%;
-      justify-content: space-between; } }
+    font-size: 1.4rem;
+  }
+  #searchresults .results {
+    width: 70%;
+    justify-content: space-between;
+  }
+}
 
 #actordetails h3 {
   width: 100%;
@@ -167,15 +205,18 @@ header {
   font-weight: 300;
   font-size: 40px;
   margin-bottom: 0;
-  margin-top: 0; }
+  margin-top: 0;
+}
 #actordetails img {
-  padding-top: 20px; }
+  padding-top: 20px;
+}
 #actordetails .moviesby {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: scale(1); }
+  transform: scale(1);
+}
 #actordetails .movie {
   margin-left: 10px;
   margin-right: 10px;
@@ -193,55 +234,71 @@ header {
   align-items: center;
   justify-content: center;
   color: #66FCF1;
-  width: inherit; }
-  #actordetails .movie p {
-    text-transform: uppercase;
-    font-size: 1.3em;
-    margin-bottom: 0; }
-  #actordetails .movie img {
-    margin-bottom: 0;
-    position: relative;
-    top: 6px;
-    width: 200;
-    height: 300;
-    float: left; }
-  #actordetails .movie i {
-    color: #66FCF1;
-    width: 200px;
-    position: relative;
-    top: -10px;
-    background-color: #0B0C10;
-    font-size: 50px; }
+  width: inherit;
+}
+#actordetails .movie p {
+  text-transform: uppercase;
+  font-size: 1.3em;
+  margin-bottom: 0;
+}
+#actordetails .movie img {
+  margin-bottom: 0;
+  position: relative;
+  top: 6px;
+  width: 200;
+  height: 300;
+  float: left;
+}
+#actordetails .movie i {
+  color: #66FCF1;
+  width: 200px;
+  position: relative;
+  top: -10px;
+  background-color: #0B0C10;
+  font-size: 50px;
+}
 @media screen and (min-width: 700px) and (max-width: 1200px) {
   #actordetails .moviesby {
-    flex-direction: row; }
+    flex-direction: row;
+  }
   #actordetails .movie {
-    width: 30%; }
-    #actordetails .movie img {
-      transform: scale(0.8); }
-    #actordetails .movie i {
-      transform: scale(0.8);
-      top: -40px; }
-    #actordetails .movie p {
-      height: 75px; } }
+    width: 30%;
+  }
+  #actordetails .movie img {
+    transform: scale(0.8);
+  }
+  #actordetails .movie i {
+    transform: scale(0.8);
+    top: -40px;
+  }
+  #actordetails .movie p {
+    height: 75px;
+  }
+}
 @media screen and (min-width: 1201px) {
   #actordetails .moviesby {
     height: 475px;
     flex-direction: row;
-    justify-content: space-around; }
+    justify-content: space-around;
+  }
   #actordetails .movie {
     padding-left: 30px;
     padding-right: 30px;
-    width: 250px; }
-    #actordetails .movie img {
-      transform: scale(1.2);
-      vertical-align: text-bottom; }
-    #actordetails .movie i {
-      transform: scale(1.2);
-      top: -10px; }
-    #actordetails .movie p {
-      height: 75px;
-      padding-bottom: 10px; } }
+    width: 250px;
+  }
+  #actordetails .movie img {
+    transform: scale(1.2);
+    vertical-align: text-bottom;
+  }
+  #actordetails .movie i {
+    transform: scale(1.2);
+    top: -10px;
+  }
+  #actordetails .movie p {
+    height: 75px;
+    padding-bottom: 10px;
+  }
+}
 
 #backbutton {
   z-index: 200;
@@ -254,17 +311,22 @@ header {
   box-shadow: 0 6px 10px 0 #C5C6C7;
   position: fixed;
   top: 85vh;
-  left: 78vw; }
-  @media screen and (min-width: 700px) and (max-width: 1200px) {
-    #backbutton {
-      transform: scale(0.8);
-      left: 90vw; } }
-  @media screen and (min-width: 1201px) {
-    #backbutton {
-      top: 50px;
-      transform: scale(0.8);
-      left: 90vw;
-      z-index: 300; } }
+  left: 78vw;
+}
+@media screen and (min-width: 700px) and (max-width: 1200px) {
+  #backbutton {
+    transform: scale(0.8);
+    left: 90vw;
+  }
+}
+@media screen and (min-width: 1201px) {
+  #backbutton {
+    top: 50px;
+    transform: scale(0.8);
+    left: 90vw;
+    z-index: 300;
+  }
+}
 
 #movieresults #moviedetails {
   text-align: center;
@@ -274,9 +336,11 @@ header {
   border-bottom: 4px solid #66FCF1;
   font-weight: 600;
   text-shadow: 2px 2px #0B0C10, -2px -2px #0B0C10;
-  font-size: 1.17em; }
-  #movieresults #moviedetails img {
-    text-shadow: 2px 2px #0B0C10, -2px -2px #0B0C10; }
+  font-size: 1.17em;
+}
+#movieresults #moviedetails img {
+  text-shadow: 2px 2px #0B0C10, -2px -2px #0B0C10;
+}
 #movieresults #cast {
   text-align: center;
   display: flex;
@@ -285,22 +349,27 @@ header {
   justify-content: center;
   justify-content: space-around;
   text-shadow: 2px 2px #0B0C10, -2px -2px #0B0C10;
-  font-size: 1.05em; }
-  #movieresults #cast .actor-credit {
-    width: 300px;
-    height: 100px;
-    padding-bottom: 20px; }
-  #movieresults #cast img {
-    border-radius: 50%;
-    border: 3px solid #0B0C10;
-    width: 100px;
-    height: 100px;
-    float: left; }
-  #movieresults #cast #tv-creators {
-    display: flex;
-    flex-direction: row; }
-    #movieresults #cast #tv-creators .creator img {
-      float: none; }
+  font-size: 1.05em;
+}
+#movieresults #cast .actor-credit {
+  width: 300px;
+  height: 100px;
+  padding-bottom: 20px;
+}
+#movieresults #cast img {
+  border-radius: 50%;
+  border: 3px solid #0B0C10;
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+#movieresults #cast #tv-creators {
+  display: flex;
+  flex-direction: row;
+}
+#movieresults #cast #tv-creators .creator img {
+  float: none;
+}
 @media screen and (min-width: 700px) and (max-width: 1200px) {
   #movieresults {
     position: relative;
@@ -310,18 +379,22 @@ header {
     align-items: flex-start;
     font-size: 1.2rem;
     border: 0;
-    width: 100%; }
-    #movieresults #moviedetails {
-      width: 50vw;
-      border-bottom: 0;
-      position: fixed;
-      top: 150px;
-      left: 0;
-      font-size: 0.8em; }
-    #movieresults #cast {
-      width: fit-content;
-      position: relative;
-      left: 20vw; } }
+    width: 100%;
+  }
+  #movieresults #moviedetails {
+    width: 50vw;
+    border-bottom: 0;
+    position: fixed;
+    top: 150px;
+    left: 0;
+    font-size: 0.8em;
+  }
+  #movieresults #cast {
+    width: fit-content;
+    position: relative;
+    left: 20vw;
+  }
+}
 @media screen and (min-width: 1201px) {
   #movieresults {
     position: relative;
@@ -331,20 +404,25 @@ header {
     align-items: flex-start;
     font-size: 1.2rem;
     border: 0;
-    width: 100%; }
-    #movieresults h3 {
-      font-size: 1.2rem; }
-    #movieresults #moviedetails {
-      width: 50vw;
-      border-bottom: 0;
-      position: fixed;
-      top: 150px;
-      left: 0;
-      font-size: 0.8em; }
-    #movieresults #cast {
-      width: fit-content;
-      position: relative;
-      left: 20vw;
-      font-size: 0.9rem; } }
+    width: 100%;
+  }
+  #movieresults h3 {
+    font-size: 1.2rem;
+  }
+  #movieresults #moviedetails {
+    width: 50vw;
+    border-bottom: 0;
+    position: fixed;
+    top: 150px;
+    left: 0;
+    font-size: 0.8em;
+  }
+  #movieresults #cast {
+    width: fit-content;
+    position: relative;
+    left: 20vw;
+    font-size: 0.9rem;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

@@ -21,6 +21,7 @@ header{
     margin: 0;
     position: fixed;
     font-weight: 900;
+    font-family: 'Bree Serif', serif;
 
 
     //meida query for tablet
@@ -48,6 +49,7 @@ header{
     opacity: 0;
     z-index: 1;
     color: $text-color;
+    font-family: 'Roboto', sans-serif;
     &.active {
         opacity: 1;
         z-index: 100;

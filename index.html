@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         http-equiv="content-security-policy" 
-        content="default-src *.themoviedb.org *.fontawesome.com 'self';
+        content="default-src *.themoviedb.org *.gstatic.com *.fontawesome.com 'self';
                 img-src *.themoviedb.org *.tmdb.org 'self';
-                style-src *.fontawesome.com 'self';
+                style-src *.fontawesome.com *.googleapis.com 'self';
                 script-src 'unsafe-inline' 'self';
                 connect-src *.themoviedb.org 'self';"
     />
@@ -15,6 +15,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <!-- load in font awesome to use  -->
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Roboto&display=swap" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Movie App</title>
