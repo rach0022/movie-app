@@ -283,10 +283,14 @@ header{
                 transform: scale(0.8);
                 top: -40px;
             }
+            p{
+                height: 75px;
+            }
         }
     }
     @media #{$desktop_query}{
         .moviesby{
+            height: 475px;
             flex-direction: row;
             justify-content: space-around;
         }
@@ -296,12 +300,14 @@ header{
             width: 250px;
             img{
                 transform: scale(1.2);
+                vertical-align: text-bottom;
             }
             i{
                 transform: scale(1.2);
                 top: -10px;
             }
             p{
+                height: 75px;
                 padding-bottom: 10px;
             }
         }

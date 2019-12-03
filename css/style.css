@@ -221,9 +221,12 @@ header {
       transform: scale(0.8); }
     #actordetails .movie i {
       transform: scale(0.8);
-      top: -40px; } }
+      top: -40px; }
+    #actordetails .movie p {
+      height: 75px; } }
 @media screen and (min-width: 1201px) {
   #actordetails .moviesby {
+    height: 475px;
     flex-direction: row;
     justify-content: space-around; }
   #actordetails .movie {
@@ -231,11 +234,13 @@ header {
     padding-right: 30px;
     width: 250px; }
     #actordetails .movie img {
-      transform: scale(1.2); }
+      transform: scale(1.2);
+      vertical-align: text-bottom; }
     #actordetails .movie i {
       transform: scale(1.2);
       top: -10px; }
     #actordetails .movie p {
+      height: 75px;
       padding-bottom: 10px; } }
 
 #backbutton {
